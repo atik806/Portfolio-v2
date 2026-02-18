@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: #f1f5f9;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-item {
+            background: #1e293b;
+            border: 1px solid #334155;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .pass { color: #10b981; }
+        .fail { color: #ef4444; }
+        h1 { color: #6366f1; }
+    </style>
+</head>
+<body>
+    <h1>Portfolio Test Suite</h1>
+    
+    <div class="test-item">
+        <h3>1. Check HTML File</h3>
+        <p id="test1">Testing...</p>
+    </div>
+
+    <div class="test-item">
+        <h3>2. Check CSS File</h3>
+        <p id="test2">Testing...</p>
+    </div>
+
+    <div class="test-item">
+        <h3>3. Check JavaScript File</h3>
+        <p id="test3">Testing...</p>
+    </div>
+
+    <div class="test-item">
+        <h3>4. Check GitHub API</h3>
+        <p id="test4">Testing...</p>
+    </div>
+
+    <div class="test-item">
+        <h3>5. Check Flask Server</h3>
+        <p id="test5">Testing...</p>
+    </div>
+
+    <script>
+        async function runTests() {
+            // Test 1: HTML
+            try {
+                const html = await fetch('index.html');
+                if (html.ok) {
+                    document.getElementById('test1').innerHTML = '<span class="pass">✓ HTML file loaded successfully</span>';
+                } else {
+                    document.getElementById('test1').innerHTML = '<span class="fail">✗ HTML file not found</span>';
+                }
+            } catch (e) {
+                document.getElementById('test1').innerHTML = '<span class="fail">✗ Error: ' + e.message + '</span>';
+            }
+
+            // Test 2: CSS
+            try {
+                const css = await fetch('styles.css');
+                if (css.ok) {
+                    document.getElementById('test2').innerHTML = '<span class="pass">✓ CSS file loaded successfully</span>';
+                } else {
+                    document.getElementById('test2').innerHTML = '<span class="fail">✗ CSS file not found</span>';
+                }
+            } catch (e) {
+                document.getElementById('test2').innerHTML = '<span class="fail">✗ Error: ' + e.message + '</span>';
+            }
+
+            // Test 3: JavaScript
+            try {
+                const js = await fetch('script.js');
+                if (js.ok) {
+                    document.getElementById('test3').innerHTML = '<span class="pass">✓ JavaScript file loaded successfully</span>';
+                } else {
+                    document.getElementById('test3').innerHTML = '<span class="fail">✗ JavaScript file not found</span>';
+                }
+            } catch (e) {
+                document.getElementById('test3').innerHTML = '<span class="fail">✗ Error: ' + e.message + '</span>';
+            }
+
+            // Test 4: GitHub API
+            try {
+                const github = await fetch('https://api.github.com/users/atik806/repos');
+                if (github.ok) {
+                    const data = await github.json();
+                    document.getElementById('test4').innerHTML = '<span class="pass">✓ GitHub API working - Found ' + data.length + ' repositories</span>';
+                } else {
+                    document.getElementById('test4').innerHTML = '<span class="fail">✗ GitHub API error</span>';
+                }
+            } catch (e) {
+                document.getElementById('test4').innerHTML = '<span class="fail">✗ Error: ' + e.message + '</span>';
+            }
+
+            // Test 5: Flask Server
+            try {
+                const flask = await fetch('/api/health');
+                if (flask.ok) {
+                    document.getElementById('test5').innerHTML = '<span class="pass">✓ Flask server is running</span>';
+                } else {
+                    document.getElementById('test5').innerHTML = '<span class="fail">✗ Flask server error</span>';
+                }
+            } catch (e) {
+                document.getElementById('test5').innerHTML = '<span class="fail">✗ Flask server not responding</span>';
+            }
+        }
+
+        // Run tests when page loads
+        window.addEventListener('load', runTests);
+    </script>
+</body>
+</html>
