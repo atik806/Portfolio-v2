@@ -1,9 +1,8 @@
 const GITHUB_API_URL = 'https://api.github.com/users/atik806/repos';
 
-// Store all projects (fetched from GitHub)
 let allProjects = [];
+let statsAnimated = false;
 
-// Language to category mapping
 const LANGUAGE_CATEGORY_MAP = {
     'Python': 'ml',
     'Jupyter Notebook': 'ml',
@@ -23,60 +22,107 @@ const LANGUAGE_CATEGORY_MAP = {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Portfolio initializing...');
-    try {
-        setupNavigation();
-        console.log('Navigation setup complete');
-        fetchAndDisplayProjects(); // Fetch all GitHub repos
-        console.log('Projects fetching...');
-        fetchGitHubStats();
-        console.log('GitHub stats fetching...');
-        generateStarBackground();
-        console.log('Star background generated');
-        setupFormHandling();
-        console.log('Form handling setup complete');
-        console.log('Portfolio fully loaded!');
-    } catch (error) {
-        console.error('Error during initialization:', error);
-    }
+    setupNavigation();
+    fetchAndDisplayProjects();
+    fetchGitHubStats();
+    generateStarBackground();
+    setupFormHandling();
+    setupScrollSpy();
+    setupNavbarScroll();
+    setupScrollAnimations();
 });
 
 // Navigation
 function setupNavigation() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
+    const backdrop = document.querySelector('.nav-backdrop');
 
-    if (hamburger && navMenu) {
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
+    if (!hamburger || !navMenu) return;
 
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-            });
-        });
+    function closeMenu() {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        if (backdrop) backdrop.classList.remove('active');
+        document.body.style.overflow = '';
     }
+
+    function openMenu() {
+        navMenu.classList.add('active');
+        hamburger.classList.add('active');
+        hamburger.setAttribute('aria-expanded', 'true');
+        if (backdrop) backdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    hamburger.addEventListener('click', () => {
+        const isOpen = navMenu.classList.contains('active');
+        isOpen ? closeMenu() : openMenu();
+    });
+
+    if (backdrop) {
+        backdrop.addEventListener('click', closeMenu);
+    }
+
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+            closeMenu();
+        }
+    });
+}
+
+// Navbar scroll effect
+function setupNavbarScroll() {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
+}
+
+// Scroll spy for active nav link
+function setupScrollSpy() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-menu a');
+
+    if (!sections.length || !navLinks.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                });
+            }
+        });
+    }, {
+        rootMargin: '-20% 0px -70% 0px',
+        threshold: 0
+    });
+
+    sections.forEach(section => observer.observe(section));
 }
 
 // Fetch and Display All GitHub Projects
 async function fetchAndDisplayProjects() {
     const grid = document.getElementById('projectsGrid');
-    if (!grid) {
-        console.error('Projects grid element not found!');
-        return;
-    }
-    
-    // Show loading state
+    if (!grid) return;
+
     grid.innerHTML = '<div class="loading-projects"><div class="spinner"></div><p>Loading projects from GitHub...</p></div>';
-    
+
     try {
         const response = await fetch(GITHUB_API_URL + '?per_page=100');
         if (!response.ok) throw new Error('Failed to fetch repos');
-        
+
         const repos = await response.json();
-        
-        // Filter out forks and transform to project format
+
         allProjects = repos
             .filter(repo => !repo.fork)
             .map(repo => ({
@@ -92,71 +138,69 @@ async function fetchAndDisplayProjects() {
                 updated: repo.updated_at,
                 language: repo.language
             }))
-            .sort((a, b) => new Date(b.updated) - new Date(a.updated)); // Sort by most recent
-        
-        console.log('Fetched', allProjects.length, 'projects from GitHub');
+            .sort((a, b) => new Date(b.updated) - new Date(a.updated));
+
         displayProjects(allProjects);
         setupProjectFilters();
-        
     } catch (error) {
         console.error('Error fetching GitHub repos:', error);
-        grid.innerHTML = '<p class="error-message">Failed to load projects. Please try again later.</p>';
+        grid.innerHTML = '<p class="no-projects">Failed to load projects. Please try again later.</p>';
     }
 }
 
-// Get category based on language
 function getCategory(language) {
     if (!language) return 'web';
     return LANGUAGE_CATEGORY_MAP[language] || 'web';
 }
 
-// Display projects
 function displayProjects(projects) {
     const grid = document.getElementById('projectsGrid');
     if (!grid) return;
-    
+
     if (projects.length === 0) {
         grid.innerHTML = '<p class="no-projects">No projects found.</p>';
         return;
     }
-    
+
     grid.innerHTML = projects.map(project => createProjectCard(project)).join('');
-    
-    // Add initial opacity and transform for animation
+
     document.querySelectorAll('.project-card').forEach((card, index) => {
         card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        card.style.transform = 'translateY(16px)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
         setTimeout(() => {
             card.style.opacity = '1';
             card.style.transform = 'translateY(0)';
-        }, index * 50);
+        }, index * 40);
     });
 }
 
-// Create Project Card
 function createProjectCard(project) {
     const categoryLabel = {
-        'robotics': '🤖 ROBOTICS',
-        'ml': '🧠 ML',
-        'web': '🌐 WEB'
+        'robotics': 'ROBOTICS',
+        'ml': 'ML',
+        'web': 'WEB'
     };
-    
+
+    const date = new Date(project.updated);
+    const timeAgo = getTimeAgo(date);
+
     return `
         <div class="project-card" data-category="${project.category}">
             <span class="project-category">${categoryLabel[project.category] || project.category.toUpperCase()}</span>
             <h3 class="project-title">${escapeHtml(project.name)}</h3>
             <p class="project-description">${escapeHtml(project.description)}</p>
             <div class="project-tech">
-                ${project.tech.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                ${project.tech.map(tech => `<span class="tech-tag">${escapeHtml(tech)}</span>`).join('')}
             </div>
+            <p class="project-updated">Updated ${timeAgo}</p>
             <div class="project-stats">
-                <span>⭐ ${project.stars || 0}</span>
-                <span>🍴 ${project.forks || 0}</span>
+                <span>&#9733; ${project.stars || 0}</span>
+                <span>&#127860; ${project.forks || 0}</span>
             </div>
             <div class="project-links">
                 <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="project-link">
-                    <i class="fab fa-github"></i> GitHub
+                    <i class="fab fa-github"></i> Code
                 </a>
                 ${project.live ? `<a href="${project.live}" target="_blank" rel="noopener noreferrer" class="project-link">
                     <i class="fas fa-external-link-alt"></i> Live
@@ -166,7 +210,25 @@ function createProjectCard(project) {
     `;
 }
 
-// Setup Project Filters
+function getTimeAgo(date) {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    const intervals = [
+        { label: 'year', seconds: 31536000 },
+        { label: 'month', seconds: 2592000 },
+        { label: 'week', seconds: 604800 },
+        { label: 'day', seconds: 86400 },
+        { label: 'hour', seconds: 3600 },
+        { label: 'minute', seconds: 60 }
+    ];
+    for (const interval of intervals) {
+        const count = Math.floor(seconds / interval.seconds);
+        if (count >= 1) {
+            return `${count} ${interval.label}${count > 1 ? 's' : ''} ago`;
+        }
+    }
+    return 'just now';
+}
+
 function setupProjectFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
 
@@ -176,20 +238,13 @@ function setupProjectFilters() {
             btn.classList.add('active');
 
             const filter = btn.dataset.filter;
-            
-            if (filter === 'all') {
-                // Show all projects
-                displayProjects(allProjects);
-            } else {
-                // Filter by category
-                const filteredProjects = allProjects.filter(p => p.category === filter);
-                displayProjects(filteredProjects);
-            }
+            const filtered = filter === 'all' ? allProjects : allProjects.filter(p => p.category === filter);
+            displayProjects(filtered);
         });
     });
 }
 
-// Fetch GitHub Stats
+// Fetch GitHub Stats with Counter Animation
 async function fetchGitHubStats() {
     try {
         const response = await fetch(GITHUB_API_URL);
@@ -202,87 +257,216 @@ async function fetchGitHubStats() {
         const totalForks = nonForkRepos.reduce((sum, repo) => sum + repo.forks_count, 0);
         const languages = new Set(nonForkRepos.map(repo => repo.language).filter(Boolean));
 
-        const totalReposEl = document.getElementById('totalRepos');
-        const totalStarsEl = document.getElementById('totalStars');
-        const totalForksEl = document.getElementById('totalForks');
-        const languagesEl = document.getElementById('languages');
+        const stats = {
+            totalRepos: nonForkRepos.length,
+            totalStars: totalStars,
+            totalForks: totalForks,
+            languages: languages.size
+        };
 
-        if (totalReposEl) totalReposEl.textContent = nonForkRepos.length;
-        if (totalStarsEl) totalStarsEl.textContent = totalStars;
-        if (totalForksEl) totalForksEl.textContent = totalForks;
-        if (languagesEl) languagesEl.textContent = languages.size;
+        // Store targets for counter animation
+        Object.entries(stats).forEach(([key, value]) => {
+            const el = document.getElementById(key === 'totalRepos' ? 'totalRepos' : key === 'totalStars' ? 'totalStars' : key === 'totalForks' ? 'totalForks' : 'languages');
+            if (el) {
+                el.dataset.target = value;
+                el.textContent = '0';
+            }
+        });
+
+        // Set up intersection observer for stats section
+        const statsSection = document.getElementById('stats');
+        if (statsSection) {
+            const statsObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !statsAnimated) {
+                        statsAnimated = true;
+                        animateCounters();
+                        statsObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+            statsObserver.observe(statsSection);
+        }
     } catch (error) {
         console.error('Error fetching GitHub stats:', error);
-        // Set fallback values on error
-        const totalReposEl = document.getElementById('totalRepos');
-        const totalStarsEl = document.getElementById('totalStars');
-        const totalForksEl = document.getElementById('totalForks');
-        const languagesEl = document.getElementById('languages');
-
-        if (totalReposEl) totalReposEl.textContent = '0';
-        if (totalStarsEl) totalStarsEl.textContent = '0';
-        if (totalForksEl) totalForksEl.textContent = '0';
-        if (languagesEl) languagesEl.textContent = '0';
     }
+}
+
+function animateCounters() {
+    const counters = [
+        { el: document.getElementById('totalRepos'), key: 'totalRepos' },
+        { el: document.getElementById('totalStars'), key: 'totalStars' },
+        { el: document.getElementById('totalForks'), key: 'totalForks' },
+        { el: document.getElementById('languages'), key: 'languages' }
+    ];
+
+    counters.forEach(({ el }) => {
+        if (!el) return;
+        const target = parseInt(el.dataset.target) || 0;
+        const duration = 1500;
+        const start = performance.now();
+
+        function update(currentTime) {
+            const elapsed = currentTime - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+            el.textContent = Math.floor(eased * target);
+
+            if (progress < 1) {
+                requestAnimationFrame(update);
+            } else {
+                el.textContent = target;
+            }
+        }
+
+        requestAnimationFrame(update);
+    });
 }
 
 // Generate Star Background
 function generateStarBackground() {
     const starsContainer = document.querySelector('.stars-background');
     if (!starsContainer) return;
-    
-    const starCount = window.innerWidth > 768 ? 100 : 50;
 
+    const isMobile = window.innerWidth <= 768;
+    const isSmall = window.innerWidth <= 480;
+    const starCount = isSmall ? 20 : isMobile ? 30 : 80;
+
+    const fragment = document.createDocumentFragment();
     for (let i = 0; i < starCount; i++) {
         const star = document.createElement('div');
+        const size = Math.random() * 2 + 0.5;
         star.style.cssText = `
             position: absolute;
-            width: ${Math.random() * 2 + 1}px;
-            height: ${Math.random() * 2 + 1}px;
+            width: ${size}px;
+            height: ${size}px;
             background: white;
             border-radius: 50%;
             left: ${Math.random() * 100}%;
             top: ${Math.random() * 100}%;
-            opacity: ${Math.random() * 0.7 + 0.3};
-            animation: twinkle ${Math.random() * 3 + 2}s infinite;
+            opacity: ${Math.random() * 0.5 + 0.2};
+            ${isMobile ? '' : `animation: twinkle ${Math.random() * 4 + 2}s infinite ${Math.random() * 2}s;`}
         `;
-        starsContainer.appendChild(star);
+        fragment.appendChild(star);
     }
+    starsContainer.appendChild(fragment);
 
-    // Add CSS animation if not exists
     if (!document.querySelector('style[data-stars]')) {
         const style = document.createElement('style');
         style.setAttribute('data-stars', 'true');
         style.textContent = `
             @keyframes twinkle {
-                0%, 100% { opacity: 0.3; }
-                50% { opacity: 1; }
+                0%, 100% { opacity: 0.2; }
+                50% { opacity: 0.8; }
             }
         `;
         document.head.appendChild(style);
     }
 }
 
-// Setup Form Handling
+// Form Handling with Validation
 function setupFormHandling() {
     const form = document.getElementById('contactForm');
-    if (form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            form.reset();
+    if (!form) return;
+
+    const inputs = form.querySelectorAll('input, textarea');
+
+    inputs.forEach(input => {
+        input.addEventListener('blur', () => validateField(input));
+        input.addEventListener('input', () => {
+            if (input.classList.contains('error')) {
+                validateField(input);
+            }
         });
+    });
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        let isValid = true;
+        inputs.forEach(input => {
+            if (!validateField(input)) isValid = false;
+        });
+
+        if (!isValid) return;
+
+        const submitBtn = form.querySelector('.btn-submit');
+        submitBtn.classList.add('loading');
+        submitBtn.disabled = true;
+
+        // Simulate sending (replace with actual form service like Formspree/EmailJS)
+        await new Promise(resolve => setTimeout(resolve, 1200));
+
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+        form.reset();
+
+        showToast('Message sent successfully! I\'ll get back to you soon.');
+    });
+}
+
+function validateField(field) {
+    const formGroup = field.closest('.form-group');
+    if (!formGroup) return true;
+
+    let isValid = true;
+
+    if (field.required && !field.value.trim()) {
+        isValid = false;
+    } else if (field.type === 'email' && field.value) {
+        isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(field.value);
     }
+
+    formGroup.classList.toggle('has-error', !isValid);
+    field.classList.toggle('error', !isValid);
+    field.classList.toggle('success', isValid && field.value.trim());
+
+    return isValid;
 }
 
-// Utility Functions
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toastMessage');
+    if (!toast || !toastMessage) return;
+
+    toastMessage.textContent = message;
+    toast.classList.add('visible');
+
+    setTimeout(() => {
+        toast.classList.remove('visible');
+    }, 4000);
 }
 
-// Smooth scroll for navigation
+// Scroll Animations
+function setupScrollAnimations() {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -60px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    setTimeout(() => {
+        document.querySelectorAll('.skill-category, .stat-card, .timeline-content, .stat-box, .contact-item').forEach(el => {
+            if (!el.style.opacity) {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(16px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            }
+        });
+    }, 100);
+}
+
+// Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
@@ -295,30 +479,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Add scroll animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-// Observe elements after DOM is ready
-setTimeout(() => {
-    document.querySelectorAll('.skill-category, .stat-card, .timeline-content').forEach(el => {
-        if (!el.style.opacity) {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        }
-    });
-}, 100);
+// Utility
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}

@@ -3,465 +3,566 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Atik - Software Engineer | Robotics & ML Enthusiast</title>
+    <meta name="description" content="Portfolio of Atik - Software Engineer specializing in Robotics, Machine Learning, and Full-Stack Development.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Main navigation">
         <div class="container">
             <div class="nav-brand">
                 <span class="logo-text">Atik</span>
             </div>
-            <ul class="nav-menu">
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <ul class="nav-menu" role="menubar">
+                <li role="none"><a href="#hero" role="menuitem">Home</a></li>
+                <li role="none"><a href="#about" role="menuitem">About</a></li>
+                <li role="none"><a href="#skills" role="menuitem">Skills</a></li>
+                <li role="none"><a href="#projects" role="menuitem">Projects</a></li>
+                <li role="none"><a href="#experience" role="menuitem">Experience</a></li>
+                <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
             </ul>
-            <div class="hamburger">
+            <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
+    <div class="nav-backdrop" aria-hidden="true"></div>
 
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="stars-background"></div>
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Hi, I'm <span class="highlight">Atik</span></h1>
-                <p class="hero-subtitle">I build intelligent systems using code and creativity</p>
-                <p class="hero-description">
-                    <strong>Software Engineer</strong> | <strong>Robotics & ML Enthusiast</strong> | <strong>Full-Stack
-                        Developer</strong>
-                </p>
-                <p class="hero-bio">
-                    Software Engineer focused on automation & ML. Passionate about robotics, scalable web systems, and
-                    competitive programming.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">
-                        <i class="fas fa-code"></i> View Projects
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <i class="fas fa-envelope"></i> Get In Touch
-                    </a>
-                </div>
-                <div class="hero-links">
-                    <a href="https://github.com/atik806" target="_blank" rel="noopener noreferrer" class="social-link">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://linkedin.com/in/atik806" target="_blank" rel="noopener noreferrer"
-                        class="social-link">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="CV/MD Atik Shahriar.docx" class="social-link" title="Download CV" download>
-                        <i class="fas fa-download"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="profile-image-container">
-                    <img src="Image/image.png" alt="Atik - Software Engineer" class="profile-image">
-                    <div class="profile-ring"></div>
-                </div>
-                <div class="floating-cards">
-                    <div class="floating-card">
-                        <div class="card-content">
-                            <i class="fas fa-code"></i>
-                            <p>Full-Stack</p>
-                        </div>
-                    </div>
-                    <div class="floating-card" style="animation-delay: 0.2s;">
-                        <div class="card-content">
-                            <i class="fas fa-robot"></i>
-                            <p>Robotics</p>
-                        </div>
-                    </div>
-                    <div class="floating-card" style="animation-delay: 0.4s;">
-                        <div class="card-content">
-                            <i class="fas fa-brain"></i>
-                            <p>Machine Learning</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        I specialize in building intelligent and scalable systems. My journey started with a passion for
-                        robotics and has evolved into a comprehensive skill set spanning full-stack development, machine
-                        learning, and automation.
+    <main id="main">
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="stars-background"></div>
+            <div class="container">
+                <div class="hero-content">
+                    <span class="hero-label">Welcome to my portfolio</span>
+                    <h1 class="hero-title">Hi, I'm <span class="highlight">Atik</span></h1>
+                    <p class="hero-subtitle">I build intelligent systems using code and creativity</p>
+                    <p class="hero-description">
+                        <strong>Software Engineer</strong> &middot; <strong>Robotics & ML Enthusiast</strong> &middot; <strong>Full-Stack Developer</strong>
                     </p>
-                    <p>
-                        My experience ranges from competitive robotics competitions to machine learning applications and
-                        enterprise-level web development. I'm driven by the challenge of solving complex problems and
-                        creating systems that make a real impact.
+                    <p class="hero-bio">
+                        Software Engineer focused on automation & ML. Passionate about robotics, scalable web systems, and
+                        competitive programming.
                     </p>
-                    <p>
-                        I'm proficient in Linux environments (Kali, Ubuntu), version control, and modern development
-                        practices. I believe in writing clean, maintainable code and continuously learning new
-                        technologies.
-                    </p>
-                    <div class="about-highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Competitive Robotics Participant</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Full-Stack Web Developer</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Machine Learning Enthusiast</span>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Linux & Automation Expert</span>
-                        </div>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            <i class="fas fa-code"></i> View Projects
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i> Get In Touch
+                        </a>
+                    </div>
+                    <div class="hero-links">
+                        <a href="https://github.com/atik806" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub Profile">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/atik806" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="CV/MD Atik Shahriar.docx" class="social-link" title="Download CV" download aria-label="Download CV">
+                            <i class="fas fa-download"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="about-stats">
-                    <div class="stat-card">
-                        <h3>50+</h3>
-                        <p>Projects Completed</p>
+                <div class="hero-visual">
+                    <div class="profile-image-container">
+                        <img src="Image/image.png" alt="Atik - Software Engineer" class="profile-image">
+                        <div class="profile-ring"></div>
+                        <div class="profile-glow"></div>
                     </div>
-                    <div class="stat-card">
-                        <h3>5+</h3>
-                        <p>Competitions</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>10+</h3>
-                        <p>Technologies</p>
-                    </div>
-                    <div class="stat-card">
-                        <h3>100%</h3>
-                        <p>Dedication</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Skills & Expertise</h2>
-            <div class="skills-grid">
-                <!-- Programming -->
-                <div class="skill-category">
-                    <h3><i class="fas fa-laptop-code"></i> Programming</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span>Python</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
+                    <div class="floating-cards">
+                        <div class="floating-card">
+                            <div class="card-content">
+                                <i class="fas fa-code"></i>
+                                <p>Full-Stack</p>
                             </div>
                         </div>
-                        <div class="skill-item">
-                            <span>JavaScript</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
+                        <div class="floating-card">
+                            <div class="card-content">
+                                <i class="fas fa-robot"></i>
+                                <p>Robotics</p>
                             </div>
                         </div>
-                        <div class="skill-item">
-                            <span>C#</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>TypeScript</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Web Development -->
-                <div class="skill-category">
-                    <h3><i class="fas fa-globe"></i> Web Development</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span>HTML & CSS</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>React</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Node.js</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Flask & Django</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Machine Learning -->
-                <div class="skill-category">
-                    <h3><i class="fas fa-brain"></i> Machine Learning</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span>NumPy & Pandas</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 88%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Scikit-learn</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>TensorFlow</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Data Analysis</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tools & Platforms -->
-                <div class="skill-category">
-                    <h3><i class="fas fa-tools"></i> Tools & Platforms</h3>
-                    <div class="skill-items">
-                        <div class="skill-item">
-                            <span>Git & GitHub</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Linux (Kali, Ubuntu)</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>Docker & Deployment</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <span>VS Code & IDEs</span>
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
+                        <div class="floating-card">
+                            <div class="card-content">
+                                <i class="fas fa-brain"></i>
+                                <p>ML</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-
-            <div class="project-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="robotics">🤖 Robotics</button>
-                <button class="filter-btn" data-filter="ml">🧠 ML</button>
-                <button class="filter-btn" data-filter="web">🌐 Web</button>
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <span>Scroll</span>
             </div>
+        </section>
 
-            <div class="projects-grid" id="projectsGrid">
-                <!-- Projects will be loaded here -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <div class="container">
-            <h2 class="section-title">Experience & Achievements</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Robotics Competitor</h3>
-                        <p class="timeline-subtitle">National Robotics Championship (BUBT)</p>
-                        <p>Built autonomous systems for navigation and strategy. Competed at national level with
-                            advanced robotics solutions.</p>
-                        <div class="timeline-tags">
-                            <span>Robotics</span>
-                            <span>Automation</span>
-                            <span>C++</span>
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">01</span>
+                    <h2 class="section-title">About Me</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>
+                            I specialize in building intelligent and scalable systems. My journey started with a passion for
+                            robotics and has evolved into a comprehensive skill set spanning full-stack development, machine
+                            learning, and automation.
+                        </p>
+                        <p>
+                            My experience ranges from competitive robotics competitions to machine learning applications and
+                            enterprise-level web development. I'm driven by the challenge of solving complex problems and
+                            creating systems that make a real impact.
+                        </p>
+                        <p>
+                            I'm proficient in Linux environments (Kali, Ubuntu), version control, and modern development
+                            practices. I believe in writing clean, maintainable code and continuously learning new
+                            technologies.
+                        </p>
+                        <div class="about-highlights">
+                            <div class="highlight-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Competitive Robotics</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Full-Stack Developer</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Machine Learning</span>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Linux & Automation</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Tech Fest Participant</h3>
-                        <p class="timeline-subtitle">NSU Tech Fest - Second Round</p>
-                        <p>Developed innovative solutions and competed against top technical talent. Showcased
-                            full-stack development capabilities.</p>
-                        <div class="timeline-tags">
-                            <span>Web Dev</span>
-                            <span>Innovation</span>
-                            <span>Full-Stack</span>
+                    <div class="about-stats">
+                        <div class="stat-card">
+                            <h3>50+</h3>
+                            <p>Projects Completed</p>
                         </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Founder - TechMart</h3>
-                        <p class="timeline-subtitle">Digital Software Solutions</p>
-                        <p>Developing digital software solutions for modern businesses. Leading product development and
-                            technical strategy.</p>
-                        <div class="timeline-tags">
-                            <span>Leadership</span>
-                            <span>Entrepreneurship</span>
-                            <span>Full-Stack</span>
+                        <div class="stat-card">
+                            <h3>5+</h3>
+                            <p>Competitions</p>
                         </div>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <div class="timeline-marker"></div>
-                    <div class="timeline-content">
-                        <h3>Full-Stack Developer</h3>
-                        <p class="timeline-subtitle">Multiple Projects & Startups</p>
-                        <p>Developed 50+ projects ranging from web applications to ML models. Specialized in scalable
-                            and intelligent systems.</p>
-                        <div class="timeline-tags">
-                            <span>Development</span>
-                            <span>ML</span>
-                            <span>Deployment</span>
+                        <div class="stat-card">
+                            <h3>10+</h3>
+                            <p>Technologies</p>
+                        </div>
+                        <div class="stat-card">
+                            <h3>100%</h3>
+                            <p>Dedication</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- GitHub Stats Section -->
-    <section id="stats" class="github-stats">
-        <div class="container">
-            <h2 class="section-title">GitHub Activity</h2>
-            <div class="stats-grid">
-                <div class="stat-box">
-                    <h3 id="totalRepos">0</h3>
-                    <p>Public Repositories</p>
+        <!-- Skills Section -->
+        <section id="skills" class="skills">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">02</span>
+                    <h2 class="section-title">Skills & Expertise</h2>
+                    <div class="section-divider"></div>
                 </div>
-                <div class="stat-box">
-                    <h3 id="totalStars">0</h3>
-                    <p>Total Stars</p>
-                </div>
-                <div class="stat-box">
-                    <h3 id="totalForks">0</h3>
-                    <p>Total Forks</p>
-                </div>
-                <div class="stat-box">
-                    <h3 id="languages">0</h3>
-                    <p>Languages Used</p>
+                <div class="skills-grid">
+                    <!-- Programming -->
+                    <div class="skill-category">
+                        <h3><i class="fas fa-laptop-code"></i> Programming</h3>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>Python</span>
+                                    <span class="skill-percent">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>JavaScript</span>
+                                    <span class="skill-percent">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>C#</span>
+                                    <span class="skill-percent">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>TypeScript</span>
+                                    <span class="skill-percent">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Web Development -->
+                    <div class="skill-category">
+                        <h3><i class="fas fa-globe"></i> Web Development</h3>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>HTML & CSS</span>
+                                    <span class="skill-percent">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>React</span>
+                                    <span class="skill-percent">88%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>Node.js</span>
+                                    <span class="skill-percent">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>Flask & Django</span>
+                                    <span class="skill-percent">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Machine Learning -->
+                    <div class="skill-category">
+                        <h3><i class="fas fa-brain"></i> Machine Learning</h3>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>NumPy & Pandas</span>
+                                    <span class="skill-percent">88%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>Scikit-learn</span>
+                                    <span class="skill-percent">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>TensorFlow</span>
+                                    <span class="skill-percent">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>Data Analysis</span>
+                                    <span class="skill-percent">85%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tools & Platforms -->
+                    <div class="skill-category">
+                        <h3><i class="fas fa-tools"></i> Tools & Platforms</h3>
+                        <div class="skill-items">
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>Git & GitHub</span>
+                                    <span class="skill-percent">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>Linux (Kali, Ubuntu)</span>
+                                    <span class="skill-percent">90%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>Docker & Deployment</span>
+                                    <span class="skill-percent">80%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="skill-label">
+                                    <span>VS Code & IDEs</span>
+                                    <span class="skill-percent">95%</span>
+                                </div>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Let's Connect</h2>
-            <p class="contact-subtitle">I'm always interested in hearing about new projects and opportunities.</p>
-
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p><a href="mailto:atik806@gmail.com">atikrj8@gmail.com</a></p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Location</h4>
-                            <p>Basundhora R/A,Dhaka,Bangladesh</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-code-branch"></i>
-                        <div>
-                            <h4>GitHub</h4>
-                            <p><a href="https://github.com/atik806" target="_blank">github.com/atik806</a></p>
-                        </div>
-                    </div>
+        <!-- Projects Section -->
+        <section id="projects" class="projects">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">03</span>
+                    <h2 class="section-title">Featured Projects</h2>
+                    <div class="section-divider"></div>
                 </div>
 
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea placeholder="Your Message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </form>
+                <div class="project-filters" role="group" aria-label="Project filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="robotics">Robotics</button>
+                    <button class="filter-btn" data-filter="ml">ML</button>
+                    <button class="filter-btn" data-filter="web">Web</button>
+                </div>
+
+                <div class="projects-grid" id="projectsGrid">
+                    <!-- Projects will be loaded here -->
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="experience">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">04</span>
+                    <h2 class="section-title">Experience & Achievements</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Robotics Competitor</h3>
+                            <p class="timeline-subtitle">National Robotics Championship (BUBT)</p>
+                            <p>Built autonomous systems for navigation and strategy. Competed at national level with
+                                advanced robotics solutions.</p>
+                            <div class="timeline-tags">
+                                <span>Robotics</span>
+                                <span>Automation</span>
+                                <span>C++</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Tech Fest Participant</h3>
+                            <p class="timeline-subtitle">NSU Tech Fest - Second Round</p>
+                            <p>Developed innovative solutions and competed against top technical talent. Showcased
+                                full-stack development capabilities.</p>
+                            <div class="timeline-tags">
+                                <span>Web Dev</span>
+                                <span>Innovation</span>
+                                <span>Full-Stack</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Founder - TechMart</h3>
+                            <p class="timeline-subtitle">Digital Software Solutions</p>
+                            <p>Developing digital software solutions for modern businesses. Leading product development and
+                                technical strategy.</p>
+                            <div class="timeline-tags">
+                                <span>Leadership</span>
+                                <span>Entrepreneurship</span>
+                                <span>Full-Stack</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Full-Stack Developer</h3>
+                            <p class="timeline-subtitle">Multiple Projects & Startups</p>
+                            <p>Developed 50+ projects ranging from web applications to ML models. Specialized in scalable
+                                and intelligent systems.</p>
+                            <div class="timeline-tags">
+                                <span>Development</span>
+                                <span>ML</span>
+                                <span>Deployment</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GitHub Stats Section -->
+        <section id="stats" class="github-stats">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">05</span>
+                    <h2 class="section-title">GitHub Activity</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <h3 id="totalRepos" data-target="0">0</h3>
+                        <p>Public Repositories</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3 id="totalStars" data-target="0">0</h3>
+                        <p>Total Stars</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3 id="totalForks" data-target="0">0</h3>
+                        <p>Total Forks</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3 id="languages" data-target="0">0</h3>
+                        <p>Languages Used</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-number">06</span>
+                    <h2 class="section-title">Let's Connect</h2>
+                    <div class="section-divider"></div>
+                </div>
+                <p class="contact-subtitle">I'm always interested in hearing about new projects and opportunities.</p>
+
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p><a href="mailto:atikrj8@gmail.com">atikrj8@gmail.com</a></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Location</h4>
+                                <p>Basundhora R/A, Dhaka, Bangladesh</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-code-branch"></i>
+                            <div>
+                                <h4>GitHub</h4>
+                                <p><a href="https://github.com/atik806" target="_blank" rel="noopener noreferrer">github.com/atik806</a></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form">
+                        <form id="contactForm" novalidate>
+                            <div class="form-group">
+                                <input type="text" id="name" placeholder=" " required autocomplete="name">
+                                <label for="name">Your Name</label>
+                                <p class="error-msg">Please enter your name</p>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" placeholder=" " required autocomplete="email">
+                                <label for="email">Your Email</label>
+                                <p class="error-msg">Please enter a valid email</p>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" placeholder=" " rows="5" required></textarea>
+                                <label for="message">Your Message</label>
+                                <p class="error-msg">Please enter your message</p>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-submit">
+                                <span class="btn-text"><i class="fas fa-paper-plane"></i> Send Message</span>
+                                <span class="btn-loading"><span class="spinner-sm"></span></span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 Atik. Software Engineer | Robotics & ML Enthusiast | Full-Stack Developer</p>
+            <p>&copy; 2026 Atik. Software Engineer | Robotics & ML Enthusiast</p>
             <div class="footer-links">
-                <a href="https://github.com/atik806" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/atik-shahriar-257666191/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                
+                <a href="https://github.com/atik806" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/atik-shahriar-257666191/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
     </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast" role="alert" aria-live="polite">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">Message sent successfully!</span>
+    </div>
 
     <script src="script.js"></script>
 </body>
