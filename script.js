@@ -118,10 +118,26 @@ async function fetchAndDisplayProjects() {
     grid.innerHTML = '<div class="loading-projects"><div class="spinner"></div><p>Loading projects from GitHub...</p></div>';
 
     try {
-        const response = await fetch(GITHUB_API_URL + '?per_page=100');
-        if (!response.ok) throw new Error('Failed to fetch repos');
-
-        const repos = await response.json();
+        // Try Flask backend proxy first (supports authenticated requests)
+        let repos;
+        try {
+            const backendResponse = await fetch('/api/projects');
+            if (backendResponse.ok) {
+                const data = await backendResponse.json();
+                if (data.success) {
+                    repos = data.projects;
+                } else {
+                    throw new Error(data.error || 'Backend fetch failed');
+                }
+            } else {
+                throw new Error('Backend unavailable');
+            }
+        } catch {
+            // Fallback: fetch directly from GitHub API
+            const directResponse = await fetch(GITHUB_API_URL + '?per_page=100');
+            if (!directResponse.ok) throw new Error('Failed to fetch repos from GitHub');
+            repos = await directResponse.json();
+        }
 
         allProjects = repos
             .filter(repo => !repo.fork)
@@ -133,9 +149,9 @@ async function fetchAndDisplayProjects() {
                 tech: [repo.language || 'Unknown'].filter(Boolean),
                 github: repo.html_url,
                 live: repo.homepage || null,
-                stars: repo.stargazers_count,
-                forks: repo.forks_count,
-                updated: repo.updated_at,
+                stars: repo.stargazers_count || repo.metadata?.stars || 0,
+                forks: repo.forks_count || repo.metadata?.forks || 0,
+                updated: repo.updated_at || repo.metadata?.updated,
                 language: repo.language
             }))
             .sort((a, b) => new Date(b.updated) - new Date(a.updated));
@@ -247,10 +263,39 @@ function setupProjectFilters() {
 // Fetch GitHub Stats with Counter Animation
 async function fetchGitHubStats() {
     try {
+        // Try Flask backend stats endpoint first
+        let repos;
+        try {
+            const backendResponse = await fetch('/api/projects/stats');
+            if (backendResponse.ok) {
+                const data = await backendResponse.json();
+                if (data.success) {
+                    const stats = data.stats;
+                    const targets = {
+                        totalRepos: stats.total_projects,
+                        totalStars: stats.total_stars,
+                        totalForks: stats.total_forks,
+                        languages: stats.languages_used
+                    };
+                    Object.entries(targets).forEach(([key, value]) => {
+                        const el = document.getElementById(key);
+                        if (el) {
+                            el.dataset.target = value;
+                            el.textContent = '0';
+                        }
+                    });
+                    setupStatsObserver();
+                    return;
+                }
+            }
+        } catch {
+            // Fallback: fetch from GitHub API directly
+        }
+
         const response = await fetch(GITHUB_API_URL);
         if (!response.ok) throw new Error('Failed to fetch');
 
-        const repos = await response.json();
+        repos = await response.json();
         const nonForkRepos = repos.filter(repo => !repo.fork);
 
         const totalStars = nonForkRepos.reduce((sum, repo) => sum + repo.stargazers_count, 0);
@@ -273,23 +318,26 @@ async function fetchGitHubStats() {
             }
         });
 
-        // Set up intersection observer for stats section
-        const statsSection = document.getElementById('stats');
-        if (statsSection) {
-            const statsObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !statsAnimated) {
-                        statsAnimated = true;
-                        animateCounters();
-                        statsObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.3 });
-            statsObserver.observe(statsSection);
-        }
+        setupStatsObserver();
     } catch (error) {
         console.error('Error fetching GitHub stats:', error);
     }
+}
+
+function setupStatsObserver() {
+    const statsSection = document.getElementById('stats');
+    if (!statsSection || statsAnimated) return;
+
+    const statsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !statsAnimated) {
+                statsAnimated = true;
+                animateCounters();
+                statsObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3 });
+    statsObserver.observe(statsSection);
 }
 
 function animateCounters() {
