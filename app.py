@@ -3,6 +3,11 @@ from flask_cors import CORS
 import requests
 from datetime import datetime
 import os
+import smtplib
+from email.message import EmailMessage
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__, static_folder='.', static_url_path='', template_folder='.')
 CORS(app)
@@ -185,5 +190,62 @@ def health():
     """Health check endpoint"""
     return jsonify({'status': 'ok'})
 
+@app.route('/api/contact', methods=['POST'])
+def contact():
+    """Send contact form message via SMTP.
+
+    Configure MAIL_* env vars (see .env.example) to enable real delivery.
+    Returns 503 with a mailto fallback when SMTP is not configured.
+    """
+    data = request.get_json(silent=True) or {}
+    name = (data.get('name') or '').strip()
+    email = (data.get('email') or '').strip()
+    message = (data.get('message') or '').strip()
+
+    # Validate input
+    if not name or not email or not message:
+        return jsonify({'success': False, 'error': 'All fields are required.'}), 400
+    if '@' not in email or '.' not in email.split('@')[-1]:
+        return jsonify({'success': False, 'error': 'Please provide a valid email address.'}), 400
+
+    mail_username = os.getenv('MAIL_USERNAME', '')
+    mail_password = os.getenv('MAIL_PASSWORD', '')
+    mail_recipient = os.getenv('MAIL_RECIPIENT', mail_username)
+
+    if not mail_username or not mail_password or not mail_recipient:
+        return jsonify({
+            'success': False,
+            'error': 'Mail is not configured yet. Email me directly instead.',
+            'fallback': 'mailto:atikrj8@gmail.com'
+        }), 503
+
+    msg = EmailMessage()
+    msg['Subject'] = f'Portfolio contact form message from {name}'
+    msg['From'] = mail_username
+    msg['To'] = mail_recipient
+    msg['Reply-To'] = email
+    msg.set_content(
+        f'Name: {name}\n'
+        f'Email: {email}\n\n'
+        f'Message:\n{message}'
+    )
+
+    mail_server = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
+    mail_port = int(os.getenv('MAIL_PORT', '587'))
+
+    try:
+        with smtplib.SMTP(mail_server, mail_port, timeout=15) as server:
+            server.ehlo()
+            server.starttls()
+            server.login(mail_username, mail_password)
+            server.send_message(msg)
+    except Exception as e:
+        app.logger.error('Failed to send contact email: %s', e)
+        return jsonify({'success': False, 'error': 'Failed to send message. Please try again later.'}), 500
+
+    return jsonify({'success': True, 'message': 'Message sent successfully!'}), 200
+
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    debug = os.getenv('FLASK_DEBUG', 'false').lower() in ('1', 'true', 'yes', 'on')
+    port = int(os.getenv('PORT', '5000'))
+    app.run(debug=debug, port=port)

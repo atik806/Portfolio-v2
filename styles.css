@@ -762,65 +762,52 @@ section {
     font-size: 1rem;
 }
 
-.skill-item {
-    margin-bottom: var(--space-lg);
-}
-
-.skill-item:last-child {
-    margin-bottom: 0;
-}
-
-.skill-label {
+.skill-tags {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: var(--space-xs);
+    flex-wrap: wrap;
+    gap: var(--space-sm);
 }
 
-.skill-label span {
+.skill-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background: rgba(var(--primary-rgb), 0.08);
+    border: 1px solid rgba(var(--primary-rgb), 0.18);
+    border-radius: var(--radius-full);
+    padding: var(--space-xs) var(--space-md);
+    transition: all var(--transition-base);
+}
+
+.skill-tag:hover {
+    background: rgba(var(--primary-rgb), 0.14);
+    border-color: rgba(var(--primary-rgb), 0.35);
+    transform: translateY(-2px);
+}
+
+.skill-tag .skill-name {
+    font-size: 0.9rem;
     font-weight: 600;
     color: var(--light);
-    font-size: 0.9rem;
 }
 
-.skill-label .skill-percent {
-    font-size: 0.8rem;
-    color: var(--primary);
-    font-weight: 600;
-}
-
-.skill-bar {
-    height: 8px;
-    background: rgba(var(--primary-rgb), 0.1);
+.skill-tag .skill-tier {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 8px;
     border-radius: var(--radius-full);
-    overflow: hidden;
 }
 
-.skill-progress {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    border-radius: var(--radius-full);
-    animation: fillBar 1.2s ease-out forwards;
-    position: relative;
+.skill-tag .tier-advanced {
+    color: #a5b4fc;
+    background: rgba(var(--primary-rgb), 0.2);
 }
 
-.skill-progress::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    animation: shimmer 2s ease-in-out infinite;
-}
-
-@keyframes fillBar {
-    from { width: 0; }
-}
-
-@keyframes shimmer {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+.skill-tag .tier-intermediate {
+    color: #f0abfc;
+    background: rgba(var(--accent-rgb), 0.15);
 }
 
 /* ===================== PROJECTS ===================== */
@@ -1089,6 +1076,22 @@ section {
     margin-bottom: var(--space-2xs);
     color: var(--light);
     font-weight: 700;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.timeline-date {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: rgba(var(--primary-rgb), 0.12);
+    border: 1px solid rgba(var(--primary-rgb), 0.25);
+    padding: 3px 10px;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+    letter-spacing: 0.03em;
 }
 
 .timeline-subtitle {

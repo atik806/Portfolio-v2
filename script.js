@@ -3,22 +3,69 @@ const GITHUB_API_URL = 'https://api.github.com/users/atik806/repos';
 let allProjects = [];
 let statsAnimated = false;
 
-const LANGUAGE_CATEGORY_MAP = {
-    'Python': 'ml',
-    'Jupyter Notebook': 'ml',
-    'C++': 'robotics',
-    'C': 'robotics',
-    'Arduino': 'robotics',
-    'JavaScript': 'web',
-    'TypeScript': 'web',
-    'HTML': 'web',
-    'CSS': 'web',
-    'React': 'web',
-    'Vue': 'web',
-    'PHP': 'web',
-    'Java': 'web',
-    'Ruby': 'web'
+const CATEGORY_LABELS = {
+    'fullstack': 'FULL-STACK',
+    'ai': 'AI & ML',
+    'robotics': 'ROBOTICS'
 };
+
+// Curated, CV-aligned featured projects.
+// `repo` is matched against the GitHub API response to enrich stars/updated_at.
+// These render even if GitHub is unreachable.
+const FEATURED_PROJECTS = [
+    {
+        repo: 'dhaka_wholesale_frontend',
+        title: 'CholoKini — E-Commerce Platform',
+        description: 'Full e-commerce platform for a wholesale marketplace with product catalog, cart, order flow, and payment integration.',
+        tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase', 'PostgreSQL'],
+        category: 'fullstack',
+        live: 'https://cholo-kini-omega.vercel.app'
+    },
+    {
+        repo: 'task-management-system',
+        title: 'Task Management System',
+        description: 'Collaborative task and project management app with role-based access, boards, and real-time updates.',
+        tech: ['React', 'TypeScript', 'Node.js', 'JWT Auth'],
+        category: 'fullstack',
+        live: 'https://task-management-system-kohl-gamma.vercel.app'
+    },
+    {
+        repo: 'blood-donation-website',
+        title: 'Blood Donation Management',
+        description: 'Platform connecting donors and recipients with a searchable donor registry and emergency request handling.',
+        tech: ['React', 'Node.js', 'Supabase', 'PostgreSQL'],
+        category: 'fullstack'
+    },
+    {
+        repo: 'meal-panner',
+        title: 'Meal Planner',
+        description: 'Smart meal planning web app that generates weekly menus from dietary preferences and tracks nutrition.',
+        tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Supabase'],
+        category: 'fullstack'
+    },
+    {
+        repo: 'FitnessWeb',
+        title: 'Fitness Web',
+        description: 'Interactive fitness platform with workout tracking, progress dashboards, and personalized routines.',
+        tech: ['React', 'TypeScript', 'Node.js', 'REST APIs'],
+        category: 'fullstack',
+        live: 'https://fitness-web-peach.vercel.app'
+    },
+    {
+        repo: 'TeacherRatingSyetemNLP',
+        title: 'Teacher Rating System (NLP)',
+        description: 'NLP-powered system that analyzes student feedback and generates automated teacher performance ratings.',
+        tech: ['Python', 'NLP', 'Machine Learning'],
+        category: 'ai'
+    },
+    {
+        repo: 'Robotics-Lab',
+        title: 'RoboTeam Hub',
+        description: 'Team portal and codebase for competitive robotics — autonomous navigation, sensor integration, and strategy tooling.',
+        tech: ['C++', 'Arduino', 'Robotics'],
+        category: 'robotics'
+    }
+];
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
@@ -110,15 +157,16 @@ function setupScrollSpy() {
     sections.forEach(section => observer.observe(section));
 }
 
-// Fetch and Display All GitHub Projects
+// Fetch and display curated featured projects, enriched with live GitHub stats.
 async function fetchAndDisplayProjects() {
     const grid = document.getElementById('projectsGrid');
     if (!grid) return;
 
-    grid.innerHTML = '<div class="loading-projects"><div class="spinner"></div><p>Loading projects from GitHub...</p></div>';
+    grid.innerHTML = '<div class="loading-projects"><div class="spinner"></div><p>Loading projects...</p></div>';
 
+    // Best-effort enrichment from GitHub (backend proxy first, then direct API).
+    const repoMap = new Map();
     try {
-        // Try Flask backend proxy first (supports authenticated requests)
         let repos;
         try {
             const backendResponse = await fetch('/api/projects');
@@ -139,34 +187,32 @@ async function fetchAndDisplayProjects() {
             repos = await directResponse.json();
         }
 
-        allProjects = repos
-            .filter(repo => !repo.fork)
-            .map(repo => ({
-                id: repo.id,
-                name: repo.name,
-                description: repo.description || 'No description available',
-                category: getCategory(repo.language),
-                tech: [repo.language || 'Unknown'].filter(Boolean),
-                github: repo.html_url,
-                live: repo.homepage || null,
-                stars: repo.stargazers_count || repo.metadata?.stars || 0,
-                forks: repo.forks_count || repo.metadata?.forks || 0,
-                updated: repo.updated_at || repo.metadata?.updated,
-                language: repo.language
-            }))
-            .sort((a, b) => new Date(b.updated) - new Date(a.updated));
-
-        displayProjects(allProjects);
-        setupProjectFilters();
+        repos.filter(repo => !repo.fork).forEach(repo => {
+            repoMap.set(repo.name, repo);
+        });
     } catch (error) {
-        console.error('Error fetching GitHub repos:', error);
-        grid.innerHTML = '<p class="no-projects">Failed to load projects. Please try again later.</p>';
+        // Non-fatal: curated cards still render, just without live star counts.
+        console.warn('GitHub fetch failed — rendering curated projects without live stats.', error);
     }
-}
 
-function getCategory(language) {
-    if (!language) return 'web';
-    return LANGUAGE_CATEGORY_MAP[language] || 'web';
+    allProjects = FEATURED_PROJECTS.map(config => {
+        const repo = repoMap.get(config.repo);
+        return {
+            id: repo?.id || config.repo,
+            name: config.title,
+            description: config.description,
+            category: config.category,
+            tech: config.tech,
+            github: repo?.html_url || `https://github.com/atik806/${config.repo}`,
+            live: config.live || null,
+            stars: repo?.stargazers_count || 0,
+            forks: repo?.forks_count || 0,
+            updated: repo?.updated_at || '2026-01-01T00:00:00Z'
+        };
+    }).sort((a, b) => new Date(b.updated) - new Date(a.updated));
+
+    displayProjects(allProjects);
+    setupProjectFilters();
 }
 
 function displayProjects(projects) {
@@ -192,18 +238,12 @@ function displayProjects(projects) {
 }
 
 function createProjectCard(project) {
-    const categoryLabel = {
-        'robotics': 'ROBOTICS',
-        'ml': 'ML',
-        'web': 'WEB'
-    };
-
     const date = new Date(project.updated);
     const timeAgo = getTimeAgo(date);
 
     return `
         <div class="project-card" data-category="${project.category}">
-            <span class="project-category">${categoryLabel[project.category] || project.category.toUpperCase()}</span>
+            <span class="project-category">${CATEGORY_LABELS[project.category] || project.category.toUpperCase()}</span>
             <h3 class="project-title">${escapeHtml(project.name)}</h3>
             <p class="project-description">${escapeHtml(project.description)}</p>
             <div class="project-tech">
@@ -442,14 +482,39 @@ function setupFormHandling() {
         submitBtn.classList.add('loading');
         submitBtn.disabled = true;
 
-        // Simulate sending (replace with actual form service like Formspree/EmailJS)
-        await new Promise(resolve => setTimeout(resolve, 1200));
+        try {
+            const payload = {
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                message: document.getElementById('message').value.trim()
+            };
 
-        submitBtn.classList.remove('loading');
-        submitBtn.disabled = false;
-        form.reset();
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
 
-        showToast('Message sent successfully! I\'ll get back to you soon.');
+            const result = await response.json().catch(() => ({}));
+
+            if (response.ok && result.success) {
+                form.reset();
+                showToast('Message sent successfully! I\'ll get back to you soon.');
+            } else if (response.status === 503 && result.fallback) {
+                // SMTP not configured on the server — open the visitor's mail client instead
+                const mailto = `${result.fallback}?subject=${encodeURIComponent('Portfolio contact from ' + payload.name)}&body=${encodeURIComponent(payload.message + '\n\n— ' + payload.name + ' (' + payload.email + ')')}`;
+                window.location.href = mailto;
+                showToast('Opened your email app — please hit send.');
+            } else {
+                showToast(result.error || 'Something went wrong. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error submitting contact form:', error);
+            showToast('Network error. Please try again or email me directly at atikrj8@gmail.com.');
+        } finally {
+            submitBtn.classList.remove('loading');
+            submitBtn.disabled = false;
+        }
     });
 }
 
