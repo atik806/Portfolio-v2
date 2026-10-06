@@ -42,7 +42,7 @@ const FLAGSHIPS = [
             'Isolated git worktree per agent, plus a review & merge panel so parallel agents never collide',
             'Plugins for GitHub, Jira, Linear, Google Drive and LinkedIn via MCP servers',
             'Local voice-to-text, routines, notes, layouts and a command palette',
-            'Signed release pipeline for Windows, macOS & Linux with built-in auto-update'
+            'Release pipeline for Windows, macOS & Linux with built-in auto-update'
         ],
         tech: ['Python', 'PySide6 / Qt', 'Git worktrees', 'MCP', 'GitHub Actions'],
         badge: 'Desktop app',
