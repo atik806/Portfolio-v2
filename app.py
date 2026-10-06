@@ -1,59 +1,111 @@
-from flask import Flask, jsonify, request, send_from_directory, make_response
+from flask import Flask, jsonify, request, send_from_directory, abort
 from flask_cors import CORS
 import requests
-from datetime import datetime
 import os
 import smtplib
+import threading
+import time
 from email.message import EmailMessage
 from dotenv import load_dotenv
 
 load_dotenv()
 
-app = Flask(__name__, static_folder='.', static_url_path='', template_folder='.')
-CORS(app)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Add cache busting headers
+# static_folder=None: every file is served through serve_static() below, which
+# only allows public asset types — never source, env or VCS files.
+app = Flask(__name__, static_folder=None)
+CORS(app, resources={r'/api/*': {'origins': '*'}})
+
+PUBLIC_EXTENSIONS = {
+    '.html', '.css', '.js', '.svg', '.png', '.jpg', '.jpeg', '.webp', '.gif',
+    '.ico', '.docx', '.pdf', '.woff', '.woff2', '.xml', '.webmanifest'
+}
+
+
 @app.after_request
 def add_header(response):
-    response.cache_control.max_age = 0
-    response.cache_control.no_cache = True
-    response.cache_control.no_store = True
-    response.cache_control.must_revalidate = True
-    response.headers['Pragma'] = 'no-cache'
-    response.headers['Expires'] = '0'
+    path = request.path
+    if path.startswith('/api/'):
+        response.headers['Cache-Control'] = 'no-store'
+    elif path == '/' or path.endswith('.html'):
+        response.headers['Cache-Control'] = 'no-cache'
+    else:
+        response.headers['Cache-Control'] = 'public, max-age=3600'
+    response.headers['X-Content-Type-Options'] = 'nosniff'
+    response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
     return response
 
 GITHUB_API_URL = 'https://api.github.com/users/atik806/repos'
 GITHUB_TOKEN = os.getenv('GITHUB_TOKEN', '')
 
-headers = {}
+headers = {'Accept': 'application/vnd.github+json'}
 if GITHUB_TOKEN:
     headers['Authorization'] = f'token {GITHUB_TOKEN}'
+
+# Small in-process cache so page views don't each hit the GitHub API
+# (60 req/hour unauthenticated). Survives across warm serverless invocations.
+CACHE_TTL_SECONDS = 600
+_repo_cache = {'data': None, 'at': 0.0}
+_repo_lock = threading.Lock()
+
+
+def fetch_repos():
+    """Return the user's public, non-fork repos (cached for CACHE_TTL_SECONDS).
+
+    Falls back to the last good response if GitHub errors after a cache expiry.
+    """
+    with _repo_lock:
+        fresh = _repo_cache['data'] is not None and time.time() - _repo_cache['at'] < CACHE_TTL_SECONDS
+        if fresh:
+            return _repo_cache['data']
+        try:
+            response = requests.get(
+                GITHUB_API_URL, headers=headers,
+                params={'per_page': 100, 'sort': 'pushed'}, timeout=10
+            )
+            response.raise_for_status()
+            repos = [p for p in response.json() if not p.get('fork', False)]
+            _repo_cache['data'] = repos
+            _repo_cache['at'] = time.time()
+            return repos
+        except requests.exceptions.RequestException:
+            if _repo_cache['data'] is not None:
+                return _repo_cache['data']
+            raise
+
 
 @app.route('/')
 def index():
     """Serve the main portfolio page"""
-    return send_from_directory('.', 'index.html')
+    return send_from_directory(BASE_DIR, 'index.html')
+
 
 @app.route('/<path:filename>')
 def serve_static(filename):
-    """Serve static files (CSS, JS, etc)"""
-    try:
-        return send_from_directory('.', filename)
-    except:
-        return send_from_directory('.', 'index.html')
+    """Serve public static assets only (CSS, JS, images, CV)."""
+    parts = filename.split('/')
+    ext = os.path.splitext(filename)[1].lower()
+    if any(part.startswith('.') or part == '__pycache__' for part in parts) or ext not in PUBLIC_EXTENSIONS:
+        abort(404)
+    if not os.path.isfile(os.path.join(BASE_DIR, filename)):
+        abort(404)
+    return send_from_directory(BASE_DIR, filename)
+
+
+@app.errorhandler(404)
+def not_found(_error):
+    if request.path.startswith('/api/'):
+        return jsonify({'success': False, 'error': 'Not found'}), 404
+    return send_from_directory(BASE_DIR, 'index.html'), 404
+
 
 @app.route('/api/projects', methods=['GET'])
 def get_projects():
-    """Fetch and cache GitHub projects"""
+    """Fetch GitHub projects (cached)"""
     try:
-        response = requests.get(GITHUB_API_URL, headers=headers, params={'per_page': 100})
-        response.raise_for_status()
-        
-        projects = response.json()
-        
-        # Filter out forks and add metadata
-        projects = [p for p in projects if not p.get('fork', False)]
+        projects = [dict(p) for p in fetch_repos()]
+
         
         # Enhance project data
         for project in projects:
@@ -77,8 +129,8 @@ def get_projects():
     except requests.exceptions.RequestException as e:
         return jsonify({
             'success': False,
-            'error': str(e)
-        }), 500
+            'error': 'GitHub is unavailable right now.'
+        }), 502
 
 @app.route('/api/projects/search', methods=['GET'])
 def search_projects():
@@ -88,11 +140,7 @@ def search_projects():
     sort_by = request.args.get('sort', 'updated')
     
     try:
-        response = requests.get(GITHUB_API_URL, headers=headers, params={'per_page': 100})
-        response.raise_for_status()
-        
-        projects = response.json()
-        projects = [p for p in projects if not p.get('fork', False)]
+        projects = list(fetch_repos())
         
         # Filter by search query
         if query:
@@ -103,7 +151,7 @@ def search_projects():
         # Filter by language
         if language:
             projects = [p for p in projects if 
-                       p.get('language', '').lower() == language]
+                       (p.get('language') or '').lower() == language]
         
         # Sort
         if sort_by == 'stars':
@@ -111,7 +159,7 @@ def search_projects():
         elif sort_by == 'forks':
             projects.sort(key=lambda x: x.get('forks_count', 0), reverse=True)
         else:  # updated
-            projects.sort(key=lambda x: x.get('updated_at', ''), reverse=True)
+            projects.sort(key=lambda x: x.get('updated_at') or '', reverse=True)
         
         return jsonify({
             'success': True,
@@ -122,18 +170,14 @@ def search_projects():
     except requests.exceptions.RequestException as e:
         return jsonify({
             'success': False,
-            'error': str(e)
-        }), 500
+            'error': 'GitHub is unavailable right now.'
+        }), 502
 
 @app.route('/api/projects/languages', methods=['GET'])
 def get_languages():
     """Get all unique languages used"""
     try:
-        response = requests.get(GITHUB_API_URL, headers=headers, params={'per_page': 100})
-        response.raise_for_status()
-        
-        projects = response.json()
-        projects = [p for p in projects if not p.get('fork', False)]
+        projects = list(fetch_repos())
         
         languages = {}
         for project in projects:
@@ -149,18 +193,14 @@ def get_languages():
     except requests.exceptions.RequestException as e:
         return jsonify({
             'success': False,
-            'error': str(e)
-        }), 500
+            'error': 'GitHub is unavailable right now.'
+        }), 502
 
 @app.route('/api/projects/stats', methods=['GET'])
 def get_stats():
     """Get portfolio statistics"""
     try:
-        response = requests.get(GITHUB_API_URL, headers=headers, params={'per_page': 100})
-        response.raise_for_status()
-        
-        projects = response.json()
-        projects = [p for p in projects if not p.get('fork', False)]
+        projects = list(fetch_repos())
         
         total_stars = sum(p.get('stargazers_count', 0) for p in projects)
         total_forks = sum(p.get('forks_count', 0) for p in projects)
@@ -182,8 +222,8 @@ def get_stats():
     except requests.exceptions.RequestException as e:
         return jsonify({
             'success': False,
-            'error': str(e)
-        }), 500
+            'error': 'GitHub is unavailable right now.'
+        }), 502
 
 @app.route('/api/health', methods=['GET'])
 def health():

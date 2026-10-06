@@ -6,12 +6,12 @@ Live at: https://portfolio-v2-smoky-xi.vercel.app/
 
 ## ✨ Features
 
-- **Hero** — headline, social links (GitHub / LinkedIn), and CV download
-- **About** — concise technical journey, education (BSc CSE at AIUB), highlight chips, and defensible stats
-- **Skills** — proficiency tiers (Advanced / Intermediate) instead of percentage bars
-- **Featured Projects** — 7 curated, CV-aligned projects with live GitHub stats, filterable by **Full-Stack / AI & ML / Robotics**
-- **Experience** — timeline with year ranges (robotics competitions, TechMart, full-stack work)
-- **GitHub Stats** — animated counters pulled live from the GitHub API (with server-side fallback)
+- **Hero** — animated aurora background, typed role line, portrait with floating highlight chips, CV download
+- **About** — bento grid with bio, live repo count, education and current focus
+- **Featured Projects** — six flagship showcases (AgentDeck, Dhaka Wholesale, VibeFlow, SOFOL, PostPilot, Back Bencher) with real screenshots, followed by **every** public project: category filters with counts, search, and "show more" paging
+- **Skills** — grouped toolkit cards (frontend, backend, mobile & desktop, AI, DevOps, languages)
+- **Experience** — timeline (AgentDeck, freelance/client work, hackathons, robotics, AIUB)
+- **GitHub Activity** — live counters, last push, and contribution chart
 - **Contact** — working form backed by a real **Flask + SMTP** endpoint, with a graceful `mailto:` fallback when mail isn't configured
 - **SEO** — semantic meta tags, Open Graph + Twitter Card, JSON-LD `Person` schema, SVG favicon
 
@@ -55,11 +55,17 @@ Copy `.env.example` to `.env` and fill in your credentials. If mail is not confi
 
 ## 🧑‍💻 Projects
 
-The featured projects grid shows 7 hand-curated, CV-aligned projects. Each card is enriched with live star/fork/update data from GitHub when available, and always renders (even if the GitHub API is down). Edit the `FEATURED_PROJECTS` array at the top of `script.js` to change what's displayed.
+Project data lives at the top of `script.js`:
+
+- `FLAGSHIPS` — the large showcase cards.
+- `PROJECTS` — every public project with a curated title, description, tech and category. Cards render immediately from this list and are then enriched with live stars / last-push dates from GitHub.
+- `HIDDEN_REPOS` — repos deliberately left off the site.
+
+Any new public repo that is neither in `PROJECTS` nor `HIDDEN_REPOS` shows up automatically using its GitHub description, so the grid never falls behind. Project screenshots live in `Image/projects/` (960px WebP).
 
 ## 🔗 Deployment
 
-Deploy as a standard Flask app. On Vercel, the backend endpoints (`/api/projects`, `/api/contact`) require the Flask server — configure the Vercel deployment to run `app.py` (or serve via a platform that supports WSGI). After deploying, update the canonical/OG URLs in the `<head>` of `index.html` to the real domain.
+Deployed on Vercel (Flask zero-config) — every push to `main` deploys automatically. The Flask app serves only public asset types (no source/env/VCS files) and caches GitHub API responses for 10 minutes.
 
 ## 📄 License
 

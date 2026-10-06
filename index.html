@@ -4,46 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Atik Shahriar &mdash; Software Developer | Full-Stack Web &amp; AI Solutions</title>
-    <meta name="description" content="Software Developer Atik Shahriar &mdash; building full-stack web applications and AI-powered solutions. BSc CSE at AIUB. Explore featured projects, skills, and experience.">
+    <title>Atik Shahriar &mdash; Full-Stack Software Engineer</title>
+    <meta name="description" content="Atik Shahriar is a full-stack software engineer in Dhaka building production web platforms, desktop developer tools, and mobile apps: AgentDeck, Dhaka Wholesale, SOFOL, PostPilot and more.">
     <meta name="author" content="Atik Shahriar">
+    <meta name="theme-color" content="#07070d">
 
-    <!-- Canonical & icons (UPDATE after deploying: replace placeholder domain below) -->
-    <!-- TODO: set these to your actual deployed URL -->
-    <link rel="canonical" href="https://atik-portfolio.vercel.app/">
+    <link rel="canonical" href="https://portfolio-v2-smoky-xi.vercel.app/">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="apple-touch-icon" href="Image/image.png">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Atik Shahriar &mdash; Software Developer | Full-Stack Web &amp; AI Solutions">
-    <meta property="og:description" content="Software Developer building full-stack web applications and AI-powered solutions. BSc CSE at AIUB.">
-    <meta property="og:url" content="https://atik-portfolio.vercel.app/">
-    <meta property="og:image" content="https://atik-portfolio.vercel.app/Image/image.png">
-    <meta property="og:site_name" content="Atik Shahriar Portfolio">
+    <meta property="og:title" content="Atik Shahriar &mdash; Full-Stack Software Engineer">
+    <meta property="og:description" content="Production web platforms, desktop developer tools, and mobile apps. Creator of AgentDeck.">
+    <meta property="og:url" content="https://portfolio-v2-smoky-xi.vercel.app/">
+    <meta property="og:image" content="https://portfolio-v2-smoky-xi.vercel.app/Image/image.png">
+    <meta property="og:site_name" content="Atik Shahriar">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Atik Shahriar &mdash; Software Developer | Full-Stack Web &amp; AI Solutions">
-    <meta name="twitter:description" content="Software Developer building full-stack web applications and AI-powered solutions.">
-    <meta name="twitter:image" content="https://atik-portfolio.vercel.app/Image/image.png">
+    <meta name="twitter:title" content="Atik Shahriar &mdash; Full-Stack Software Engineer">
+    <meta name="twitter:description" content="Production web platforms, desktop developer tools, and mobile apps. Creator of AgentDeck.">
+    <meta name="twitter:image" content="https://portfolio-v2-smoky-xi.vercel.app/Image/image.png">
 
-    <!-- JSON-LD Person schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Atik Shahriar",
-        "jobTitle": "Software Developer",
-        "url": "https://atik-portfolio.vercel.app/",
-        "image": "https://atik-portfolio.vercel.app/Image/image.png",
+        "jobTitle": "Full-Stack Software Engineer",
+        "url": "https://portfolio-v2-smoky-xi.vercel.app/",
+        "image": "https://portfolio-v2-smoky-xi.vercel.app/Image/image.png",
         "email": "mailto:atikrj8@gmail.com",
-        "telephone": "+8801302228993",
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Dhaka",
-            "addressCountry": "Bangladesh",
-            "streetAddress": "Bashundhara R/A"
+            "addressCountry": "Bangladesh"
         },
         "alumniOf": {
             "@type": "CollegeOrUniversity",
@@ -58,438 +54,428 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
     <a href="#main" class="skip-link">Skip to content</a>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
 
     <!-- Navigation -->
-    <nav class="navbar" aria-label="Main navigation">
-        <div class="container">
-            <div class="nav-brand">
-                <span class="logo-text">Atik</span>
-            </div>
-            <ul class="nav-menu" role="menubar">
-                <li role="none"><a href="#hero" role="menuitem">Home</a></li>
-                <li role="none"><a href="#about" role="menuitem">About</a></li>
-                <li role="none"><a href="#skills" role="menuitem">Skills</a></li>
-                <li role="none"><a href="#projects" role="menuitem">Projects</a></li>
-                <li role="none"><a href="#experience" role="menuitem">Experience</a></li>
-                <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
+    <header class="navbar">
+        <nav class="container nav-inner" aria-label="Main navigation">
+            <a href="#hero" class="nav-brand" aria-label="Atik Shahriar, home">
+                <span class="brand-mark">AS</span>
+                <span class="brand-name">Atik Shahriar</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="nav-menu-cta"><a href="#contact" class="btn btn-primary btn-sm">Hire me</a></li>
             </ul>
+            <a href="#contact" class="btn btn-primary btn-sm nav-cta">Hire me</a>
             <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
-        </div>
-    </nav>
+        </nav>
+    </header>
     <div class="nav-backdrop" aria-hidden="true"></div>
 
     <main id="main">
-        <!-- Hero Section -->
+        <!-- Hero -->
         <section id="hero" class="hero">
-            <div class="stars-background"></div>
-            <div class="container">
+            <div class="hero-bg" aria-hidden="true">
+                <div class="aurora aurora-1"></div>
+                <div class="aurora aurora-2"></div>
+                <div class="aurora aurora-3"></div>
+                <div class="grid-overlay"></div>
+            </div>
+
+            <div class="container hero-inner">
                 <div class="hero-content">
-                    <span class="hero-label">Welcome to my portfolio</span>
-                    <h1 class="hero-title">Hi, I'm <span class="highlight">Atik</span></h1>
-                    <p class="hero-subtitle">Building full-stack web &amp; AI solutions that make a real impact</p>
-                    <p class="hero-description">
-                        <strong>Software Developer</strong> &middot; <strong>Full-Stack Web &amp; AI Solutions</strong> &middot; <strong>Competitive Robotics</strong>
+                    <span class="status-pill reveal"><span class="pulse-dot"></span> Available for freelance &amp; full-time roles</span>
+                    <h1 class="hero-title reveal">
+                        Hi, I'm Atik.<br>
+                        I build <span class="gradient-text">software<br class="br-desktop"> people actually use.</span>
+                    </h1>
+                    <p class="hero-role reveal">
+                        <span class="mono">&gt;</span> Full-stack engineer shipping
+                        <span class="typed" id="typed" aria-live="polite">production web platforms</span><span class="caret" aria-hidden="true"></span>
                     </p>
-                    <p class="hero-bio">
-                        Software Developer focused on full-stack web applications and AI-powered solutions.
-                        Background in competitive robotics and machine learning — I build things that scale, then ship them.
+                    <p class="hero-bio reveal">
+                        I'm a CSE student at AIUB with products already in production: <strong>AgentDeck</strong>, a cross-platform desktop
+                        workspace for AI coding agents; a live wholesale e-commerce platform; and a fintech mobile app with an
+                        Express + Supabase backend.
                     </p>
-                    <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary">
-                            <i class="fas fa-code"></i> View Projects
+                    <div class="hero-buttons reveal">
+                        <a href="#projects" class="btn btn-primary btn-lg">
+                            View my work <i class="fas fa-arrow-right"></i>
                         </a>
-                        <a href="#contact" class="btn btn-secondary">
-                            <i class="fas fa-envelope"></i> Get In Touch
+                        <a href="CV/Atik_Shahriar_CV.docx" class="btn btn-ghost btn-lg" download>
+                            <i class="fas fa-file-arrow-down"></i> Download CV
                         </a>
                     </div>
-                    <div class="hero-links">
-                        <a href="https://github.com/atik806" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub Profile">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/atik-shahriar-257666191/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="CV/Atik_Shahriar_CV.docx" class="social-link" title="Download CV" download aria-label="Download CV">
-                            <i class="fas fa-download"></i>
-                        </a>
+                    <div class="hero-meta reveal">
+                        <div class="hero-socials">
+                            <a href="https://github.com/atik806" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/atik-shahriar-257666191/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="mailto:atikrj8@gmail.com" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        </div>
+                        <span class="hero-location"><i class="fas fa-location-dot"></i> Dhaka, Bangladesh &middot; GMT+6</span>
                     </div>
                 </div>
-                <div class="hero-visual">
-                    <div class="profile-image-container">
-                        <img src="Image/image.png" alt="Atik - Software Engineer" class="profile-image">
-                        <div class="profile-ring"></div>
-                        <div class="profile-glow"></div>
+
+                <div class="hero-visual reveal">
+                    <div class="portrait">
+                        <div class="portrait-border"></div>
+                        <img src="Image/profile.webp" alt="Portrait of Atik Shahriar" class="portrait-img" width="576" height="789" fetchpriority="high">
                     </div>
-                    <div class="floating-cards">
-                        <div class="floating-card">
-                            <div class="card-content">
-                                <i class="fas fa-code"></i>
-                                <p>Full-Stack</p>
-                            </div>
-                        </div>
-                        <div class="floating-card">
-                            <div class="card-content">
-                                <i class="fas fa-robot"></i>
-                                <p>Robotics</p>
-                            </div>
-                        </div>
-                        <div class="floating-card">
-                            <div class="card-content">
-                                <i class="fas fa-brain"></i>
-                                <p>ML</p>
-                            </div>
-                        </div>
+                    <div class="float-chip chip-1">
+                        <span class="chip-icon"><i class="fas fa-terminal"></i></span>
+                        <div><strong>AgentDeck</strong><small>Win &middot; macOS &middot; Linux</small></div>
+                    </div>
+                    <div class="float-chip chip-2">
+                        <span class="chip-icon chip-icon-green"><i class="fas fa-code-branch"></i></span>
+                        <div><strong><span data-live="repos">55</span>+ repos</strong><small>on GitHub</small></div>
+                    </div>
+                    <div class="float-chip chip-3">
+                        <span class="chip-icon chip-icon-pink"><i class="fas fa-rocket"></i></span>
+                        <div><strong>10+ live</strong><small>products shipped</small></div>
                     </div>
                 </div>
             </div>
-            <div class="scroll-indicator">
-                <div class="mouse">
-                    <div class="wheel"></div>
+
+            <a href="#about" class="scroll-cue" aria-label="Scroll to About">
+                <span class="mouse"><span class="wheel"></span></span>
+            </a>
+        </section>
+
+        <!-- Tech marquee -->
+        <div class="marquee" aria-label="Technologies I work with">
+            <div class="marquee-track">
+                <span><i class="fab fa-react"></i> React</span>
+                <span><i class="fas fa-n"></i> Next.js</span>
+                <span><i class="fas fa-code"></i> TypeScript</span>
+                <span><i class="fab fa-node-js"></i> Node.js</span>
+                <span><i class="fas fa-cat"></i> NestJS</span>
+                <span><i class="fas fa-bolt"></i> Supabase</span>
+                <span><i class="fas fa-database"></i> PostgreSQL</span>
+                <span><i class="fab fa-python"></i> Python</span>
+                <span><i class="fas fa-window-restore"></i> PySide6 / Qt</span>
+                <span><i class="fas fa-mobile-screen"></i> React Native</span>
+                <span><i class="fas fa-layer-group"></i> Expo</span>
+                <span><i class="fas fa-wind"></i> Tailwind CSS</span>
+                <span><i class="fas fa-fire"></i> Firebase</span>
+                <span><i class="fab fa-docker"></i> Docker</span>
+                <span><i class="fab fa-git-alt"></i> Git</span>
+                <span><i class="fas fa-play"></i> Vercel</span>
+            </div>
+        </div>
+
+        <!-- About -->
+        <section id="about" class="section about">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="eyebrow">01 &mdash; About</span>
+                    <h2 class="section-title">Engineer by training, <span class="gradient-text">builder by habit.</span></h2>
                 </div>
-                <span>Scroll</span>
+
+                <div class="bento">
+                    <article class="bento-card bento-bio reveal">
+                        <p class="lead">
+                            I'm Atik, a full-stack software engineer from Dhaka. I take products from an empty repo to deployment,
+                            then keep improving them after launch.
+                        </p>
+                        <p>
+                            Most of my work is TypeScript: Next.js and React on the front end, NestJS, Express and Supabase/PostgreSQL
+                            behind them. I also build desktop software in Python and Qt (AgentDeck runs on Windows, macOS and Linux)
+                            and mobile apps with React Native and Expo.
+                        </p>
+                        <p>
+                            I started in competitive robotics building autonomous bots for national championships, and I still
+                            enjoy hackathons. Lately I've been working on AI developer tooling and making multi-agent coding workflows feel
+                            effortless.
+                        </p>
+                    </article>
+
+                    <article class="bento-card bento-stat reveal">
+                        <span class="stat-num" data-count="10">10+</span>
+                        <span class="stat-label">Live products</span>
+                    </article>
+                    <article class="bento-card bento-stat reveal">
+                        <span class="stat-num"><span data-live="repos">55</span>+</span>
+                        <span class="stat-label">Public repositories</span>
+                    </article>
+                    <article class="bento-card bento-stat reveal">
+                        <span class="stat-num">3</span>
+                        <span class="stat-label">Desktop OSes AgentDeck ships on</span>
+                    </article>
+                    <article class="bento-card bento-stat reveal">
+                        <span class="stat-num">5+</span>
+                        <span class="stat-label">Competitions &amp; hackathons</span>
+                    </article>
+
+                    <article class="bento-card bento-edu reveal">
+                        <span class="card-icon"><i class="fas fa-graduation-cap"></i></span>
+                        <div>
+                            <h3>BSc in Computer Science &amp; Engineering</h3>
+                            <p>American International University-Bangladesh (AIUB)</p>
+                        </div>
+                    </article>
+                    <article class="bento-card bento-focus reveal">
+                        <span class="card-icon card-icon-green"><i class="fas fa-bullseye"></i></span>
+                        <div>
+                            <h3>Currently focused on</h3>
+                            <p>AI developer tooling, scalable SaaS back ends, and polished cross-platform apps.</p>
+                        </div>
+                    </article>
+                </div>
             </div>
         </section>
 
-        <!-- About Section -->
-        <section id="about" class="about">
+        <!-- Projects -->
+        <section id="projects" class="section projects">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-number">01</span>
-                    <h2 class="section-title">About Me</h2>
-                    <div class="section-divider"></div>
+                <div class="section-header reveal">
+                    <span class="eyebrow">02 &mdash; Work</span>
+                    <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+                    <p class="section-sub">Flagship products first, then every project from my GitHub. Live stars and update times come from the GitHub API.</p>
                 </div>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>
-                            I'm a Software Developer based in Dhaka, Bangladesh, pursuing my BSc in Computer Science &amp;
-                            Engineering at AIUB. I build production-grade full-stack applications with Next.js, React,
-                            TypeScript, Node.js, and Supabase.
-                        </p>
-                        <p>
-                            My journey started in competitive robotics — building autonomous systems for national
-                            championships — and has grown into a focus on AI-powered web solutions. I love taking an idea
-                            from a clean API design to a deployed product people actually use.
-                        </p>
-                        <p>
-                            I write clean, maintainable code, practice modern version control and deployment workflows, and
-                            am always learning something new.
-                        </p>
-                        <div class="about-highlights">
-                            <div class="highlight-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Full-Stack Development</span>
-                            </div>
-                            <div class="highlight-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span>AI &amp; ML</span>
-                            </div>
-                            <div class="highlight-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Robotics</span>
-                            </div>
-                            <div class="highlight-item">
-                                <i class="fas fa-check-circle"></i>
-                                <span>Competitive Programming</span>
-                            </div>
+
+                <!-- Flagship showcase -->
+                <div class="showcase" id="showcase"></div>
+
+                <!-- All projects -->
+                <div class="all-projects">
+                    <div class="all-head reveal">
+                        <h3 class="all-title">All projects <span class="count-badge" id="projectCount">0</span></h3>
+                        <div class="search-box">
+                            <i class="fas fa-magnifying-glass"></i>
+                            <input type="search" id="projectSearch" placeholder="Search projects or tech&hellip;" aria-label="Search projects">
                         </div>
                     </div>
-                    <div class="about-stats">
-                        <div class="stat-card">
-                            <h3>6+</h3>
-                            <p>Deployed Projects</p>
-                        </div>
-                        <div class="stat-card">
-                            <h3>5+</h3>
-                            <p>Competitions</p>
-                        </div>
-                        <div class="stat-card">
-                            <h3>10+</h3>
-                            <p>Technologies</p>
-                        </div>
-                        <div class="stat-card">
-                            <h3>1+</h3>
-                            <p>Years Coding</p>
-                        </div>
+                    <div class="project-filters reveal" id="projectFilters" role="group" aria-label="Filter projects by category"></div>
+                    <div class="projects-grid" id="projectsGrid">
+                        <div class="loading-projects"><div class="spinner"></div><p>Loading projects&hellip;</p></div>
+                    </div>
+                    <div class="grid-actions">
+                        <button class="btn btn-ghost" id="loadMore" hidden>Show more projects <i class="fas fa-chevron-down"></i></button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Skills Section -->
-        <section id="skills" class="skills">
+        <!-- Skills -->
+        <section id="skills" class="section skills">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-number">02</span>
-                    <h2 class="section-title">Skills & Expertise</h2>
-                    <div class="section-divider"></div>
+                <div class="section-header reveal">
+                    <span class="eyebrow">03 &mdash; Toolkit</span>
+                    <h2 class="section-title">Skills &amp; <span class="gradient-text">Expertise</span></h2>
                 </div>
                 <div class="skills-grid">
-                    <!-- Languages -->
-                    <div class="skill-category">
-                        <h3><i class="fas fa-laptop-code"></i> Languages</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag"><span class="skill-name">TypeScript</span><span class="skill-tier tier-advanced">Advanced</span></span>
-                            <span class="skill-tag"><span class="skill-name">JavaScript</span><span class="skill-tier tier-advanced">Advanced</span></span>
-                            <span class="skill-tag"><span class="skill-name">Python</span><span class="skill-tier tier-intermediate">Intermediate</span></span>
-                            <span class="skill-tag"><span class="skill-name">C++</span><span class="skill-tier tier-intermediate">Intermediate</span></span>
+                    <div class="skill-card reveal">
+                        <div class="skill-head"><span class="card-icon"><i class="fas fa-laptop-code"></i></span><h3>Frontend</h3></div>
+                        <p>Fast, accessible interfaces with strong design systems.</p>
+                        <div class="chips">
+                            <span class="chip chip-strong">React 19</span><span class="chip chip-strong">Next.js 16</span><span class="chip chip-strong">TypeScript</span><span class="chip chip-strong">Tailwind CSS</span><span class="chip">Zustand</span><span class="chip">SWR</span><span class="chip">Framer Motion</span>
                         </div>
                     </div>
-
-                    <!-- Frameworks -->
-                    <div class="skill-category">
-                        <h3><i class="fas fa-layer-group"></i> Frameworks</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag"><span class="skill-name">React</span><span class="skill-tier tier-advanced">Advanced</span></span>
-                            <span class="skill-tag"><span class="skill-name">Next.js</span><span class="skill-tier tier-advanced">Advanced</span></span>
-                            <span class="skill-tag"><span class="skill-name">Tailwind CSS</span><span class="skill-tier tier-advanced">Advanced</span></span>
-                            <span class="skill-tag"><span class="skill-name">Node.js</span><span class="skill-tier tier-intermediate">Intermediate</span></span>
-                            <span class="skill-tag"><span class="skill-name">Nest.js</span><span class="skill-tier tier-intermediate">Intermediate</span></span>
+                    <div class="skill-card reveal">
+                        <div class="skill-head"><span class="card-icon card-icon-green"><i class="fas fa-server"></i></span><h3>Backend &amp; Data</h3></div>
+                        <p>Secure APIs, auth, real-time data, and sensible schemas.</p>
+                        <div class="chips">
+                            <span class="chip chip-strong">NestJS</span><span class="chip chip-strong">Node / Express</span><span class="chip chip-strong">Supabase</span><span class="chip chip-strong">PostgreSQL</span><span class="chip">REST &amp; JWT</span><span class="chip">Firebase</span><span class="chip">Flask</span>
                         </div>
                     </div>
-
-                    <!-- Backend & Data -->
-                    <div class="skill-category">
-                        <h3><i class="fas fa-database"></i> Backend &amp; Data</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag"><span class="skill-name">Supabase</span><span class="skill-tier tier-advanced">Advanced</span></span>
-                            <span class="skill-tag"><span class="skill-name">REST APIs</span><span class="skill-tier tier-advanced">Advanced</span></span>
-                            <span class="skill-tag"><span class="skill-name">JWT Auth</span><span class="skill-tier tier-advanced">Advanced</span></span>
-                            <span class="skill-tag"><span class="skill-name">PostgreSQL</span><span class="skill-tier tier-intermediate">Intermediate</span></span>
+                    <div class="skill-card reveal">
+                        <div class="skill-head"><span class="card-icon card-icon-pink"><i class="fas fa-mobile-screen-button"></i></span><h3>Mobile &amp; Desktop</h3></div>
+                        <p>Cross-platform apps that feel native on every device.</p>
+                        <div class="chips">
+                            <span class="chip chip-strong">React Native</span><span class="chip chip-strong">Expo</span><span class="chip chip-strong">Python + PySide6</span><span class="chip">React Native Skia</span><span class="chip">Reanimated</span><span class="chip">PyInstaller</span>
                         </div>
                     </div>
-
-                    <!-- Tools & Platforms -->
-                    <div class="skill-category">
-                        <h3><i class="fas fa-tools"></i> Tools &amp; Platforms</h3>
-                        <div class="skill-tags">
-                            <span class="skill-tag"><span class="skill-name">Git &amp; GitHub</span><span class="skill-tier tier-advanced">Advanced</span></span>
-                            <span class="skill-tag"><span class="skill-name">Vercel</span><span class="skill-tier tier-advanced">Advanced</span></span>
-                            <span class="skill-tag"><span class="skill-name">Docker</span><span class="skill-tier tier-intermediate">Intermediate</span></span>
-                            <span class="skill-tag"><span class="skill-name">Linux</span><span class="skill-tier tier-intermediate">Intermediate</span></span>
+                    <div class="skill-card reveal">
+                        <div class="skill-head"><span class="card-icon card-icon-amber"><i class="fas fa-brain"></i></span><h3>AI &amp; ML</h3></div>
+                        <p>Practical AI features, agent tooling, and classic ML.</p>
+                        <div class="chips">
+                            <span class="chip chip-strong">LLM integrations</span><span class="chip chip-strong">MCP servers</span><span class="chip">NLP</span><span class="chip">PyTorch</span><span class="chip">scikit-learn</span><span class="chip">Whisper STT</span>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="projects">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-number">03</span>
-                    <h2 class="section-title">Featured Projects</h2>
-                    <div class="section-divider"></div>
-                </div>
-
-                <div class="project-filters" role="group" aria-label="Project filters">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="fullstack">Full-Stack</button>
-                    <button class="filter-btn" data-filter="ai">AI & ML</button>
-                    <button class="filter-btn" data-filter="robotics">Robotics</button>
-                </div>
-
-                <div class="projects-grid" id="projectsGrid">
-                    <!-- Projects will be loaded here -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience" class="experience">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-number">04</span>
-                    <h2 class="section-title">Experience & Achievements</h2>
-                    <div class="section-divider"></div>
-                </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <h3>Robotics Competitor <span class="timeline-date">2024&ndash;2025</span></h3>
-                            <p class="timeline-subtitle">National Robotics Championship (BUBT)</p>
-                            <p>Built autonomous systems for navigation and strategy. Competed at national level with
-                                advanced robotics solutions.</p>
-                            <div class="timeline-tags">
-                                <span>Robotics</span>
-                                <span>Automation</span>
-                                <span>C++</span>
-                            </div>
+                    <div class="skill-card reveal">
+                        <div class="skill-head"><span class="card-icon card-icon-cyan"><i class="fas fa-gears"></i></span><h3>DevOps &amp; Tooling</h3></div>
+                        <p>Shipping and maintaining releases with CI, tests, and auto-update.</p>
+                        <div class="chips">
+                            <span class="chip chip-strong">Git &amp; GitHub</span><span class="chip chip-strong">GitHub Actions</span><span class="chip chip-strong">Vercel</span><span class="chip">Docker</span><span class="chip">Linux</span><span class="chip">Jest / Vitest</span>
                         </div>
                     </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <h3>Tech Fest Participant <span class="timeline-date">2024</span></h3>
-                            <p class="timeline-subtitle">NSU Tech Fest &ndash; Second Round</p>
-                            <p>Developed innovative solutions and competed against top technical talent. Showcased
-                                full-stack development capabilities.</p>
-                            <div class="timeline-tags">
-                                <span>Web Dev</span>
-                                <span>Innovation</span>
-                                <span>Full-Stack</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <h3>Founder &ndash; TechMart <span class="timeline-date">2024&ndash;Present</span></h3>
-                            <p class="timeline-subtitle">Digital Software Solutions</p>
-                            <p>Developing digital software solutions for modern businesses. Leading product development and
-                                technical strategy.</p>
-                            <div class="timeline-tags">
-                                <span>Leadership</span>
-                                <span>Entrepreneurship</span>
-                                <span>Full-Stack</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <h3>Full-Stack Developer <span class="timeline-date">2023&ndash;Present</span></h3>
-                            <p class="timeline-subtitle">Freelance &amp; Personal Projects</p>
-                            <p>Built and deployed full-stack web applications &mdash; e-commerce platforms, dashboards, and
-                                AI-powered tools &mdash; shipping real products used by real users.</p>
-                            <div class="timeline-tags">
-                                <span>Development</span>
-                                <span>ML</span>
-                                <span>Deployment</span>
-                            </div>
+                    <div class="skill-card reveal">
+                        <div class="skill-head"><span class="card-icon card-icon-violet"><i class="fas fa-microchip"></i></span><h3>Languages</h3></div>
+                        <p>Comfortable across the stack, from bots to browsers.</p>
+                        <div class="chips">
+                            <span class="chip chip-strong">TypeScript</span><span class="chip chip-strong">JavaScript</span><span class="chip chip-strong">Python</span><span class="chip">C++</span><span class="chip">C#</span><span class="chip">SQL</span><span class="chip">PHP</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- GitHub Stats Section -->
-        <section id="stats" class="github-stats">
+        <!-- Experience -->
+        <section id="experience" class="section experience">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-number">05</span>
-                    <h2 class="section-title">GitHub Activity</h2>
-                    <div class="section-divider"></div>
+                <div class="section-header reveal">
+                    <span class="eyebrow">04 &mdash; Journey</span>
+                    <h2 class="section-title">Experience &amp; <span class="gradient-text">Achievements</span></h2>
+                </div>
+                <ol class="timeline">
+                    <li class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-top"><h3>Creator &amp; Lead Developer &middot; AgentDeck</h3><span class="timeline-date">2026 &ndash; Present</span></div>
+                            <p class="timeline-org">Desktop workspace for AI coding agents</p>
+                            <ul class="timeline-points">
+                                <li>Designed and shipped a Python/PySide6 app that runs Claude, Codex, Copilot, Gemini and other agents side by side in real terminal panes.</li>
+                                <li>Built isolated git worktrees per agent, a review &amp; merge panel, GitHub/Jira/Linear/Drive plugins via MCP, and local voice-to-text.</li>
+                                <li>Ship Windows, macOS and Linux builds with CI release pipelines and auto-update. AgentDeck is currently at v0.39.</li>
+                            </ul>
+                            <div class="chips"><span class="chip">Python</span><span class="chip">Qt / PySide6</span><span class="chip">MCP</span><span class="chip">CI/CD</span></div>
+                        </div>
+                    </li>
+                    <li class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-top"><h3>Full-Stack Developer &middot; Freelance &amp; Client Work</h3><span class="timeline-date">2023 &ndash; Present</span></div>
+                            <p class="timeline-org">E-commerce, SaaS &amp; business platforms</p>
+                            <ul class="timeline-points">
+                                <li>Built Dhaka Wholesale, a live e-commerce platform (Next.js 16 storefront + NestJS/Supabase API with admin dashboard).</li>
+                                <li>Built PostPilot (multi-platform social publishing SaaS) and the VibeFlow web platform with client portal and admin tooling.</li>
+                                <li>Delivered landing sites, dashboards and booking systems for small businesses.</li>
+                            </ul>
+                            <div class="chips"><span class="chip">Next.js</span><span class="chip">NestJS</span><span class="chip">Supabase</span><span class="chip">Vercel</span></div>
+                        </div>
+                    </li>
+                    <li class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-top"><h3>Hackathon Competitor</h3><span class="timeline-date">2024 &ndash; 2026</span></div>
+                            <p class="timeline-org">SUST CSE Carnival 2026 &middot; IUT Hackathon &middot; NSU Tech Fest</p>
+                            <ul class="timeline-points">
+                                <li>QueueStorm Investigator: an AI/API SupportOps copilot for a digital-finance platform (SUST CSE Carnival 2026, Codex Community Hackathon).</li>
+                                <li>Office Energy Monitor: NestJS + Next.js system with anomaly detection and a Discord bot (IUT Hackathon).</li>
+                                <li>Reached the second round of NSU Tech Fest with a full-stack solution.</li>
+                            </ul>
+                            <div class="chips"><span class="chip">NestJS</span><span class="chip">AI pipelines</span><span class="chip">Rapid prototyping</span></div>
+                        </div>
+                    </li>
+                    <li class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-top"><h3>Robotics Competitor</h3><span class="timeline-date">2024 &ndash; 2025</span></div>
+                            <p class="timeline-org">National Robotics Championship (BUBT)</p>
+                            <ul class="timeline-points">
+                                <li>Built autonomous robots (line followers, soccer bots, drones) and competed at national level.</li>
+                            </ul>
+                            <div class="chips"><span class="chip">C++</span><span class="chip">Arduino</span><span class="chip">Embedded</span></div>
+                        </div>
+                    </li>
+                    <li class="timeline-item reveal">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-card">
+                            <div class="timeline-top"><h3>BSc in Computer Science &amp; Engineering</h3><span class="timeline-date">In progress</span></div>
+                            <p class="timeline-org">American International University-Bangladesh (AIUB)</p>
+                            <ul class="timeline-points">
+                                <li>Coursework spans mobile app development, advanced web technologies and software engineering. Final project: SOFOL, a farmer-credit fintech app.</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- GitHub -->
+        <section id="stats" class="section github">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="eyebrow">05 &mdash; Open source</span>
+                    <h2 class="section-title">GitHub <span class="gradient-text">Activity</span></h2>
                 </div>
                 <div class="stats-grid">
-                    <div class="stat-box">
-                        <h3 id="totalRepos" data-target="0">0</h3>
-                        <p>Public Repositories</p>
-                    </div>
-                    <div class="stat-box">
-                        <h3 id="totalStars" data-target="0">0</h3>
-                        <p>Total Stars</p>
-                    </div>
-                    <div class="stat-box">
-                        <h3 id="totalForks" data-target="0">0</h3>
-                        <p>Total Forks</p>
-                    </div>
-                    <div class="stat-box">
-                        <h3 id="languages" data-target="0">0</h3>
-                        <p>Languages Used</p>
-                    </div>
+                    <div class="stat-box reveal"><i class="fas fa-book-bookmark"></i><h3 id="totalRepos" data-target="0">0</h3><p>Public repositories</p></div>
+                    <div class="stat-box reveal"><i class="fas fa-star"></i><h3 id="totalStars" data-target="0">0</h3><p>Total stars</p></div>
+                    <div class="stat-box reveal"><i class="fas fa-code"></i><h3 id="languages" data-target="0">0</h3><p>Languages used</p></div>
+                    <div class="stat-box reveal"><i class="fas fa-clock-rotate-left"></i><h3 id="lastPush">&mdash;</h3><p>Last push</p></div>
                 </div>
+                <a class="contrib-card reveal" href="https://github.com/atik806" target="_blank" rel="noopener noreferrer">
+                    <img src="https://ghchart.rshah.org/7c5cff/atik806" alt="Atik Shahriar's GitHub contribution chart" loading="lazy" onerror="this.closest('.contrib-card').remove()">
+                </a>
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="contact">
+        <!-- Contact -->
+        <section id="contact" class="section contact">
             <div class="container">
-                <div class="section-header">
-                    <span class="section-number">06</span>
-                    <h2 class="section-title">Let's Connect</h2>
-                    <div class="section-divider"></div>
-                </div>
-                <p class="contact-subtitle">I'm always interested in hearing about new projects and opportunities.</p>
-
-                <div class="contact-content">
+                <div class="contact-wrap reveal">
                     <div class="contact-info">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <p><a href="mailto:atikrj8@gmail.com">atikrj8@gmail.com</a></p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone-alt"></i>
-                            <div>
-                                <h4>Phone</h4>
-                                <p><a href="tel:+8801302228993">01302228993</a></p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Location</h4>
-                                <p>Bashundhara R/A, Dhaka, Bangladesh</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-code-branch"></i>
-                            <div>
-                                <h4>GitHub</h4>
-                                <p><a href="https://github.com/atik806" target="_blank" rel="noopener noreferrer">github.com/atik806</a></p>
-                            </div>
-                        </div>
+                        <span class="eyebrow">06 &mdash; Contact</span>
+                        <h2 class="section-title">Let's build something <span class="gradient-text">great together.</span></h2>
+                        <p class="contact-subtitle">Have a project, a role, or an idea? I usually reply within a day.</p>
+                        <ul class="contact-list">
+                            <li><span class="card-icon"><i class="fas fa-envelope"></i></span><div><small>Email</small><a href="mailto:atikrj8@gmail.com">atikrj8@gmail.com</a></div></li>
+                            <li><span class="card-icon card-icon-green"><i class="fas fa-phone"></i></span><div><small>Phone</small><a href="tel:+8801302228993">+880 1302-228993</a></div></li>
+                            <li><span class="card-icon card-icon-pink"><i class="fab fa-linkedin-in"></i></span><div><small>LinkedIn</small><a href="https://www.linkedin.com/in/atik-shahriar-257666191/" target="_blank" rel="noopener noreferrer">atik-shahriar</a></div></li>
+                            <li><span class="card-icon card-icon-cyan"><i class="fas fa-location-dot"></i></span><div><small>Location</small><span>Bashundhara R/A, Dhaka, Bangladesh</span></div></li>
+                        </ul>
                     </div>
 
-                    <div class="contact-form">
-                        <form id="contactForm" novalidate>
+                    <form id="contactForm" class="contact-form" novalidate>
+                        <div class="form-row">
                             <div class="form-group">
                                 <input type="text" id="name" placeholder=" " required autocomplete="name">
-                                <label for="name">Your Name</label>
+                                <label for="name">Your name</label>
                                 <p class="error-msg">Please enter your name</p>
                             </div>
                             <div class="form-group">
                                 <input type="email" id="email" placeholder=" " required autocomplete="email">
-                                <label for="email">Your Email</label>
+                                <label for="email">Your email</label>
                                 <p class="error-msg">Please enter a valid email</p>
                             </div>
-                            <div class="form-group">
-                                <textarea id="message" placeholder=" " rows="5" required></textarea>
-                                <label for="message">Your Message</label>
-                                <p class="error-msg">Please enter your message</p>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-submit">
-                                <span class="btn-text"><i class="fas fa-paper-plane"></i> Send Message</span>
-                                <span class="btn-loading"><span class="spinner-sm"></span></span>
-                            </button>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" placeholder=" " rows="6" required></textarea>
+                            <label for="message">Tell me about your project</label>
+                            <p class="error-msg">Please enter your message</p>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-submit">
+                            <span class="btn-text">Send message <i class="fas fa-paper-plane"></i></span>
+                            <span class="btn-loading"><span class="spinner-sm"></span></span>
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Atik. Software Engineer | Robotics & ML Enthusiast</p>
+        <div class="container footer-inner">
+            <a href="#hero" class="nav-brand"><span class="brand-mark">AS</span><span class="brand-name">Atik Shahriar</span></a>
+            <p>&copy; <span id="year">2026</span> Atik Shahriar &middot; Built with HTML, CSS, JavaScript &amp; Flask.</p>
             <div class="footer-links">
                 <a href="https://github.com/atik806" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/atik-shahriar-257666191/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.linkedin.com/in/atik-shahriar-257666191/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:atikrj8@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </footer>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast" role="alert" aria-live="polite">
-        <i class="fas fa-check-circle"></i>
+    <button class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">
+        <i class="fas fa-circle-check"></i>
         <span id="toastMessage">Message sent successfully!</span>
     </div>
 
