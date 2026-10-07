@@ -26,7 +26,8 @@ Live at: https://portfolio-v2-smoky-xi.vercel.app/
 ├── requirements.txt
 ├── .env.example      # Environment variable template
 └── CV/
-    └── Atik_Shahriar_CV.docx   # Linked from the hero "Download CV" button
+    ├── Atik_Shahriar_CV.pdf    # Linked from the hero "Download CV" button
+    └── Atik_Shahriar_CV.docx   # Editable source; export the PDF from it after edits
 ```
 
 ## 🚀 Running locally
